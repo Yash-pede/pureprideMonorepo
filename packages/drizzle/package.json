@@ -1,0 +1,21 @@
+{
+  "name": "@repo/drizzle",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./db": "./db/index.ts",
+    "./schema": "./migrations/schema.ts"
+  },
+  "scripts": {
+    "dbpull": "drizzle-kit introspect:pg",
+    "dbpush": "drizzle-kit push:pg",
+    "dbgen": "drizzle-kit generate:pg"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.20.6"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.29.1",
+    "postgres": "^3.4.3"
+  }
+}
