@@ -10,11 +10,9 @@ import {
   User,
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
+
 const NavbarSite = () => {
-  const supabase = createClientComponentClient({
-    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  });
+  const supabase = createClientComponentClient();
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
@@ -25,7 +23,7 @@ const NavbarSite = () => {
       if (error) {
         console.error("Error fetching user session:", error);
         return;
-      }
+      } 
 
       setUser(userSession?.session?.user || null);
     };

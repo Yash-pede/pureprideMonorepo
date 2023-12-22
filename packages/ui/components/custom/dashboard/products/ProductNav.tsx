@@ -1,20 +1,16 @@
 "use client";
 import React, { useCallback, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import {
-  Button,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-  Input,
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../../../shadCnExport";
+} from "../../../ui/sheet";
+import { Input } from "../../../ui/input";
+import { Button } from "../../../ui/button";
 import {
   LoaderIcon,
   Plus,
@@ -22,40 +18,49 @@ import {
   PlusSquare,
   XCircle,
 } from "lucide-react";
-import Image from "next/image";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useDropzone } from "react-dropzone";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../../../ui/form";
 import { useForm } from "react-hook-form";
 import { ExtendedFile, addProductFormSchema } from "@repo/shared/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import Image from "next/image";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from "uuid";
 
-const ProductsNav = () => {
+const ProductNav = () => {
   const supabase = createClientComponentClient();
   const [files, setFiles] = useState<ExtendedFile[]>([]);
   const [rejected, setRejected] = useState<File[]>([]);
-
-  const onDrop = useCallback((acceptedFiles: File[], rejectedfiles: any) => {
-    if (acceptedFiles.length > 0) {
-      setFiles(() => [
-        ...acceptedFiles.map((file: File) =>
-          Object.assign(file, { preview: URL.createObjectURL(file) })
-        ),
-      ]);
-    }
-    if (rejected.length > 0) {
-      setRejected((previousFiles) => [...previousFiles, ...rejectedfiles]);
-    }
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const onDrop = useCallback(
+    (acceptedFiles: File[], rejectedfiles: any) => {
+      if (acceptedFiles.length > 0) {
+        setFiles(() => [
+          ...acceptedFiles.map((file: File) =>
+            Object.assign(file, { preview: URL.createObjectURL(file) })
+          ),
+        ]);
+      }
+      if (rejected.length > 0) {
+        setRejected((previousFiles) => [...previousFiles, ...rejectedfiles]);
+      }
+    },
+    [rejected.length]
+  );
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
+    noClick: true,
+    autoFocus: true,
     accept: { "image/*": [] },
     maxSize: 1024 * 5000,
     maxFiles: 1,
   });
-
 
   const removeFile = (name: string) => {
     setFiles((files) => files.filter((file) => file.name !== name));
@@ -85,14 +90,14 @@ const ProductsNav = () => {
   }
 
   const onSubmit = async (data: z.infer<typeof addProductFormSchema>) => {
-    console.log(files);
+    // console.log(files);
     try {
-      if (files.length) {
+      if (files.length > 0 && files[0]) {
         const { data: ProductImageAdded, error: ImageError } =
           await supabase.storage
             .from("Products")
             .upload(
-              `public/ProductImages-${Date.now().toString()}-${files[0].name}`,
+              `images/ProductImage-${Date.now().toString()}-${files[0]?.name}`,
               files[0]
             );
         if (ImageError) {
@@ -111,6 +116,7 @@ const ProductsNav = () => {
               price: 0,
               description: data.description,
               imageURL: ProductImageAdded.path,
+              updated_at: new Date(),
             },
           ]);
         if (error) {
@@ -128,7 +134,7 @@ const ProductsNav = () => {
   };
 
   return (
-    <div className="w-full justify-between flex flex-col md:flex-row items-center mb-5 ">
+    <nav className="w-full justify-between flex flex-col md:flex-row items-center mb-5">
       <h1 className="text-3xl font-bold mb-5 text-left ">Products</h1>
       <Sheet>
         <SheetTrigger>
@@ -180,36 +186,57 @@ const ProductsNav = () => {
                       </FormItem>
                     )}
                   />
-
+                  <FormField
+                    control={form.control}
+                    name="image"
+                    render={() => (
+                      <div {...getRootProps()} className="w-full xl:hidden">
+                        <input {...getInputProps()} />
+                        <Button
+                          type="button"
+                          className="w-full"
+                          variant={"btn-primary"}
+                          onClick={open}
+                        >
+                          Open Explorer
+                        </Button>
+                      </div>
+                    )}
+                  />
                   <FormField
                     control={form.control}
                     name="image"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="hidden md:block">
                         <div {...getRootProps()}>
                           <input
                             {...getInputProps({ onChange: field.onChange })}
                             {...field}
                           />
                           {files.length === 0 && (
-                            <div className="w-full bg-slate-300/10 rounded-2xl relative h-[150px] flex justify-center items-center">
-                              <div className="flex gap-4 justify-center items-center">
-                                {isDragActive ? (
-                                  <>
-                                    <PlusSquare />
-                                    <p>Drop Your Files here</p>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Plus />
-                                    <p>Upload Files</p>
-                                  </>
-                                )}
+                            <>
+                              <div
+                                className="w-full bg-secondary rounded-2xl relative h-[150px] flex justify-center items-center cursor-pointer"
+                                onClick={open}
+                              >
+                                <div className="flex gap-4 justify-center items-center">
+                                  {isDragActive ? (
+                                    <>
+                                      <PlusSquare />
+                                      <p>Drop Your Files here</p>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Plus />
+                                      <p>Upload Files</p>
+                                    </>
+                                  )}
+                                </div>
+                                <div className="absolute bottom-3 w-full text-center text-sm">
+                                  <span>Upload Single image at a time </span>
+                                </div>
                               </div>
-                              <div className="absolute bottom-3 w-full text-center text-sm">
-                                <span>Upload Single image at a time </span>
-                              </div>
-                            </div>
+                            </>
                           )}
                         </div>
                         {files.length && (
@@ -257,7 +284,7 @@ const ProductsNav = () => {
                   />
 
                   <Button
-                    variant={"btn-primary"}
+                    variant={"btn-secondary"}
                     type="submit"
                     className="w-full flex gap-2"
                   >
@@ -276,8 +303,8 @@ const ProductsNav = () => {
           </SheetHeader>
         </SheetContent>
       </Sheet>
-    </div>
+    </nav>
   );
 };
 
-export default ProductsNav;
+export default ProductNav;

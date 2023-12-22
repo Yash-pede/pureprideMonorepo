@@ -1,5 +1,5 @@
 "use client"
-
+import * as React from "react"
 import {
   Toast,
   ToastClose,
@@ -7,8 +7,8 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from ".//toast"
-import { useToast } from ".//use-toast"
+} from "./toast"
+import { useToast } from "./use-toast"
 
 export function Toaster() {
   const { toasts } = useToast()

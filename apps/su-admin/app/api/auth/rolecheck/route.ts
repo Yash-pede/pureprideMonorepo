@@ -10,8 +10,8 @@ export const POST = async (req: NextRequest) => {
     .from(profiles)
     .where(eq(profiles.email, email));
 
-  console.log(result[0].userrole);
-  if (result[0].userrole !== userRoles.enumValues[0]) {
+  console.log(result[0]?.userrole);
+  if (result && result[0]?.userrole !== userRoles.enumValues[0]) {
     return NextResponse.json({
       success: false,
       message: "You are not a SuperAdmin",

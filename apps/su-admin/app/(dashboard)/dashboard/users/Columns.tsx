@@ -8,13 +8,15 @@ import axios from "axios";
 import {
   ArrowUpDown,
   Ban,
+  CalendarCheck2,
   Delete,
   DeleteIcon,
   EyeOff,
   TypeIcon,
 } from "lucide-react";
 import { toast } from "sonner";
-import { ComboboxDemo } from "@repo/ui/components";
+import {ComboboxDemo} from "@repo/ui/components";
+import { formatDate } from "@repo/ui/shadCnUtils";
 
 const onBan = async (id: string) => {
   const response = await axios.delete("/api/users", {
@@ -42,8 +44,6 @@ const onDelete = async (id: string) => {
     toast.error(response.data.message);
   }
 };
-
-let open = false;
 
 export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
   {
@@ -102,7 +102,7 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
   },
   {
     accessorKey: "userrole",
-    header: ({ column }) => {
+    header: () => {
       return (
         <Button variant="ghost">
           Role
@@ -139,12 +139,14 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
       <div className="lowercase">
         <div className="flex gap-3 items-center justify-start">
           <Button
+            className="hover:scale-105 duration-200 transition-all"
             variant={"destructive"}
             onClick={() => onBan(row.getValue("id"))}
           >
             <Ban className="w-4 h-4" />
           </Button>
           <Button
+            className="hover:scale-105 duration-200 transition-all"
             variant={"outline"}
             onClick={() => onDelete(row.getValue("id"))}
           >
@@ -156,12 +158,34 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
   },
   {
     accessorKey: "updatedAt",
-    header: "updatedAt",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Updated At
+          <CalendarCheck2 className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      if (row.getValue("updatedAt")) {
+        return (
+          <p className="text-xs text-center text-muted-foreground">
+            {formatDate(row.getValue("updatedAt"))}
+          </p>
+        );
+      } else {
+        return <p className="text-xs text-center text-muted-foreground">-</p>;
+      }
+    },
   },
   {
     accessorKey: "id",
+    maxSize: 5,
+    size: 4,
     enableResizing: false,
-    size: 20,
     header: ({ column }) => {
       return (
         <Button
@@ -178,9 +202,7 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <span className="truncate w-[50%]">{row.getValue("id")}</span>
-    ),
+    cell: ({ row }) => <p className="truncate w-[50%]">{row.getValue("id")}</p>,
     enableSorting: false,
     enableHiding: true,
   },

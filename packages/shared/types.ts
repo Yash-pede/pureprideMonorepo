@@ -17,3 +17,12 @@ export const addProductFormSchema = z.object({
 export interface ExtendedFile extends File {
   preview: string;
 }
+
+export interface products {
+  id: string;
+  updatedAt: Date | null;
+  name: string;
+  price: number | null;
+  description: string | null;
+  imageUrl: string;
+}

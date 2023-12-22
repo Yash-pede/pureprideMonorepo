@@ -4,6 +4,8 @@ import { cn } from "@repo/ui/shadCnUtils";
 import { ThemeProvider } from "@repo/ui/themeProvider";
 import { DM_Sans } from "next/font/google";
 import { Toaster } from "sonner";
+import TanstackProvider from "@repo/ui/TanstackProvider";
+import "../../../packages/ui/config/globals.css"
 
 const fontSans = DM_Sans({
   subsets: ["latin"],
@@ -28,15 +30,18 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster richColors={true} />
-        </ThemeProvider>
+        <TanstackProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            enableColorScheme
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster richColors={true} />
+          </ThemeProvider>
+        </TanstackProvider>
       </body>
     </html>
   );

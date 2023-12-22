@@ -10,7 +10,7 @@ import {
 } from "../../ui/navigation-menu";
 import { cn } from "../../../config/utils";
 import Link from "next/link";
-import { components } from "@repo/shared/dummyContent";
+import { components, menuItems } from "@repo/shared/dummyContent";
 import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import {
@@ -47,6 +47,7 @@ import ThemeSwitcher from "../utils/ThemeSwitcher";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const [isnavMenuOpen, setIsnavMenuOpen] = useState(false);
@@ -57,7 +58,8 @@ const Navbar = () => {
   };
   const signOut = async () => {
     await supabase.auth.signOut();
-    router.replace("/");
+    router.push("/");
+    toast.error("Signed out");
   };
   const router = useRouter();
 

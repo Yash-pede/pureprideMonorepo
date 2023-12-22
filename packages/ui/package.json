@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./shadCnComponents": "./components/shadCnExport.ts",
-    "./components": "./components/custom.ts",
+    "./shadCnComponents": "./shadCnExport.ts",
+    "./components": "./customComponents.ts",
     "./shadCnCss": "./config/globals.css",
     "./themeProvider": "./components/theme-provider.tsx",
-    "./TanstackProvider": "./components/TanstackQuery.tsx",
+    "./TanstackProvider": "./components/tanstackProvider.tsx",
     "./shadCnUtils": "./config/utils.ts"
   },
   "scripts": {

@@ -55,8 +55,8 @@ export default function SignInForm() {
         toast.error(error.message);
         return;
       }
-      toast.success(response.data.message);
-      router.replace("/dashboard");
+      toast.success("Logged in as " + user?.email);
+      router.push("/dashboard");
     } else {
       toast.error(response.data.message);
     }

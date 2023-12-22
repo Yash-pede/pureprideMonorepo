@@ -33,35 +33,34 @@ export default function ComboboxDemo({
     React.useState<(typeof userRoles.enumValues)[number]>(defaultValue);
   const supabase = createClientComponentClient();
   const isInitialRender = React.useRef(true);
-
-  const updateUserRole = async (
-    selectedValue: (typeof userRoles.enumValues)[number]
-  ) => {
-    try {
-      const selectedIndex = userRoles.enumValues.indexOf(selectedValue);
-
-      if (selectedIndex !== -1) {
-        const { data, error } = await supabase
-          .from("profiles")
-          .update({ userrole: userRoles.enumValues[selectedIndex] })
-          .eq("id", id)
-          .select();
-        if (error) {
-          throw error;
-        }
-        toast.success(
-          `User role updated successfully as: ${data[0].userrole}`
-        );
-      } else {
-        toast.error("Selected enum value not found in the enumValues array.");
-      }
-    } catch (error) {
-      console.error("Error updating user role:", error);
-      toast.error("Error updating user role");
-    }
-  };
-
   React.useEffect(() => {
+    const updateUserRole = async (
+      selectedValue: (typeof userRoles.enumValues)[number]
+    ) => {
+      try {
+        const selectedIndex = userRoles.enumValues.indexOf(selectedValue);
+
+        if (selectedIndex !== -1) {
+          const { data, error } = await supabase
+            .from("profiles")
+            .update({ userrole: userRoles.enumValues[selectedIndex] })
+            .eq("id", id)
+            .select();
+          if (error) {
+            throw error;
+          }
+          toast.success(
+            `User role updated successfully as: ${data[0].userrole}`
+          );
+        } else {
+          toast.error("Selected enum value not found in the enumValues array.");
+        }
+      } catch (error) {
+        console.error("Error updating user role:", error);
+        toast.error("Error updating user role");
+      }
+    };
+
     if (!isInitialRender.current && value !== defaultValue) {
       updateUserRole(value);
     } else {

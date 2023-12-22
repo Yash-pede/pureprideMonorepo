@@ -1,11 +1,12 @@
 "use client";
-import { AllProduct, ProductsNav } from "@repo/ui/components";
+
+import { AllProducts, ProductNav } from "@repo/ui/components";
 
 const Products = () => {
   return (
     <main>
-      <ProductsNav />
-      <AllProduct />
+      <ProductNav />
+      <AllProducts />
     </main>
   );
 };

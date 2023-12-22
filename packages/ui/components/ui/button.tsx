@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default:
+          "whitespace-nowrap bg-primary text-lg text-primary-foreground shadow-2xl shadow-indigo-600/50 rounded-lg hover:bg-primary/80",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -21,9 +22,9 @@ const buttonVariants = cva(
         "btn-primary":
           " whitespace-nowrap hover:text-primary-foreground dark:bg-gradient-to-t dark:from-[#24232C] dark:to-[#100F18] dark:text-primary-foreground border hover:border-primary dark:border-[#464553] dark:hover:bg-accent hover:bg-primary dark:hover:border-muted-foreground text-lg font-normal",
         "btn-secondary":
-          "whitespace-nowrap dark:text-primary-foreground text-lg font-normal",
+          "whitespace-nowrap dark:text-primary-foreground bg-muted text-lg font-normal",
         "btn-sidebar":
-          "whitespace-nowrap dark:text-primary-foreground text-lg font-normal hover:bg-accent hover:text-accent-foreground transition-colors dark:hover:bg-accent dark:hover:text-accent-foreground transparent hover:shadow-xl hover:shadow-purple-500/10 rounded-lg duration-100",
+          "whitespace-nowrap hover:scale-105 duration-100 transition-all dark:text-primary-foreground text-lg font-normal hover:bg-white border-[0.2px] hover:border-black/10 hover: hover:text-accent-foreground dark:hover:bg-accent dark:hover:text-accent-foreground hover:shadow-xl hover:shadow-purple-500/10 rounded-md",
       },
       size: {
         default: "h-10 px-4 py-2",

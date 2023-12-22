@@ -6,18 +6,17 @@ import { redirect } from "next/navigation";
 import { userRoles } from "@repo/drizzle/schema";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+  const cookieStore = cookies();
   try {
     const supabase = createServerComponentClient({
-      cookies() {
-        return cookies();
-      },
+      cookies: () => cookieStore,
     });
     const userEmail = (await supabase.auth.getUser()).data.user?.email;
     const { data: role } = await supabase
       .from("profiles")
       .select("userrole")
       .eq("email", userEmail);
-    if (!(role && role[0].userrole === userRoles.enumValues[0])) {
+    if (!(role && role[0]?.userrole === userRoles.enumValues[0])) {
       throw new Error("Unauthorized");
     }
   } catch (err) {

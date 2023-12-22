@@ -4,7 +4,7 @@
   "private": true,
   "exports": {
     "./db": "./db/index.ts",
-    "./schema": "./migrations/schema.ts"
+    "./schema": "./schemaExport.ts"
   },
   "scripts": {
     "dbpull": "drizzle-kit introspect:pg",

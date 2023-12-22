@@ -93,7 +93,8 @@ export default function SignInForm() {
           .from("profiles")
           .select("username")
           .eq("username", e.toLowerCase().replace(/ /g, "-"));
-        console.log(data);
+        // console.log(data);
+        if (error) throw new Error(error.message);
         if (data && data.length > 0) {
           setIsUserNameAvailable(false);
         } else {
