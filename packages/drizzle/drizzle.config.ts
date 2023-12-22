@@ -5,6 +5,6 @@ export default {
   out: "./migrations",
   driver: "pg",
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL || "",
+    connectionString:"postgresql://postgres:NOfFrCfrZwQ05Ulr@db.krtkfjphiovnpjawcxwo.supabase.co:5432/postgres",
   },
 } satisfies Config;
