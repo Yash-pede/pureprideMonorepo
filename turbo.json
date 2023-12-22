@@ -5,15 +5,18 @@
   "pipeline": {
     "build": {
       "dotEnv": [".env"],
+      "env": ["NEXT_PUBLIC_*", "!NEXT_PUBLIC_GIT_*"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
       "dotEnv": [".env"],
+      "env": ["NEXT_PUBLIC_*", "!NEXT_PUBLIC_GIT_*"],
       "dependsOn": ["^lint"]
     },
     "dev": {
       "dotEnv": [".env"],
+      "env": ["NEXT_PUBLIC_*", "!NEXT_PUBLIC_GIT_*"],
       "cache": false,
       "persistent": true
     }
