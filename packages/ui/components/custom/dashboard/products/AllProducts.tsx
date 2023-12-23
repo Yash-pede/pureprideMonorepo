@@ -15,9 +15,11 @@ import {
 import { products } from "@repo/shared/types";
 import { Button } from "../../../ui/button";
 import { formatDate } from "../../../../config/utils";
+import { useRouter } from "next/navigation";
 
 const AllProducts = () => {
-  const { data, isLoading, status } = useQuery({
+  const router = useRouter()
+  const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const response = await axios.get("/api/products");
@@ -68,7 +70,7 @@ const AllProducts = () => {
                   <p className="text-lg "> &#8377;{product.price}</p>
                 </CardContent>
                 <CardFooter className="flex flex-col gap-1">
-                  <Button className="w-full">View</Button>
+                  <Button className="w-full" onClick={() => router.push(`/dashboard/products/${product.id}`)}>View</Button>
                   {product.updatedAt && (
                     <p className="text-xs text-muted-foreground text-right w-full bottom-0 mt-5">
                       Updated at: {formatDate(product.updatedAt)}

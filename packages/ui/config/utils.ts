@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatDate = (date: Date): string => {
-  if (Date !== null) {
+export const formatDate = (date: Date | null | undefined): string => {
+  if (date !== null && date !== undefined) {
     const options: Intl.DateTimeFormatOptions = {
       hour: "numeric",
       minute: "numeric",

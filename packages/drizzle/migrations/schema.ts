@@ -1,4 +1,4 @@
-import { pgTable, unique, pgEnum, uuid, timestamp, text } from "drizzle-orm/pg-core"
+import { pgTable, unique, pgEnum, uuid, timestamp, text, foreignKey, bigint } from "drizzle-orm/pg-core"
   import { sql } from "drizzle-orm"
 
 export const keyStatus = pgEnum("key_status", ['default', 'valid', 'invalid', 'expired'])
@@ -8,6 +8,8 @@ export const factorStatus = pgEnum("factor_status", ['unverified', 'verified'])
 export const aalLevel = pgEnum("aal_level", ['aal1', 'aal2', 'aal3'])
 export const codeChallengeMethod = pgEnum("code_challenge_method", ['s256', 'plain'])
 export const userRoles = pgEnum("user_roles", ['SUPERADMIN', 'ADMIN', 'DISTRIBUTORS', 'UNDEFINED'])
+export const equalityOp = pgEnum("equality_op", ['eq', 'neq', 'lt', 'lte', 'gt', 'gte', 'in'])
+export const action = pgEnum("action", ['INSERT', 'UPDATE', 'DELETE', 'TRUNCATE', 'ERROR'])
 
 
 export const profiles = pgTable("profiles", {
@@ -38,4 +40,12 @@ export const products = pgTable("products", {
 		productsNameUnique: unique("products_name_unique").on(table.name),
 		productsImageUrlKey: unique("products_image URL_key").on(table.imageUrl),
 	}
+});
+
+export const cart = pgTable("cart", {
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	user: uuid("user").primaryKey().notNull().references(() => profiles.id, { onDelete: "cascade", onUpdate: "cascade" } ),
+	product: uuid("product").references(() => products.id, { onDelete: "cascade", onUpdate: "cascade" } ),
+	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	quantity: bigint("quantity", { mode: "number" }).notNull(),
 });

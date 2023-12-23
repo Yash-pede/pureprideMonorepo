@@ -1,9 +1,9 @@
 {
-  "name": "su-admin",
+  "name": "distributor",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0"
