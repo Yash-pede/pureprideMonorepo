@@ -53,7 +53,7 @@ const Product = ({ params }: { params: { productId: string } }) => {
               "https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/" +
               product?.imageUrl
             }
-            alt={product?.name}
+            alt="Product image"
             width={400}
             height={400}
             className="object-cover inset-0 rounded-lg"
