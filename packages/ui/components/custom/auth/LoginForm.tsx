@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -11,9 +11,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/ui/shadCnComponents";
-import { Input } from "@repo/ui/shadCnComponents";
-import { Button } from "@repo/ui/shadCnComponents";
+} from "../../ui/form";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { LoaderIcon, LogInIcon } from "lucide-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ const FormSchema = z.object({
   }),
 });
 
-export default function SignInForm() {
+export default function LoginForm() {
   const supabase = createClientComponentClient();
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({

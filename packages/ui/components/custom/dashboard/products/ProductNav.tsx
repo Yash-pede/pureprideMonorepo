@@ -189,55 +189,50 @@ const ProductNav = () => {
                   <FormField
                     control={form.control}
                     name="image"
-                    render={() => (
-                      <div {...getRootProps()} className="w-full xl:hidden">
-                        <input {...getInputProps()} />
-                        <Button
-                          type="button"
-                          className="w-full"
-                          variant={"btn-primary"}
-                          onClick={open}
-                        >
-                          Open Explorer
-                        </Button>
-                      </div>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="image"
                     render={({ field }) => (
-                      <FormItem className="hidden md:block">
+                      <FormItem className="">
                         <div {...getRootProps()}>
                           <input
                             {...getInputProps({ onChange: field.onChange })}
                             {...field}
                           />
-                          {files.length === 0 && (
-                            <>
-                              <div
-                                className="w-full bg-secondary rounded-2xl relative h-[150px] flex justify-center items-center cursor-pointer"
-                                onClick={open}
-                              >
-                                <div className="flex gap-4 justify-center items-center">
-                                  {isDragActive ? (
-                                    <>
-                                      <PlusSquare />
-                                      <p>Drop Your Files here</p>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <Plus />
-                                      <p>Upload Files</p>
-                                    </>
-                                  )}
+                          <div className="hidden xl:block">
+                            {files.length === 0 && (
+                              <>
+                                <div
+                                  className="w-full bg-secondary rounded-2xl relative h-[150px] flex justify-center items-center cursor-pointer"
+                                  onClick={open}
+                                >
+                                  <div className="flex gap-4 justify-center items-center">
+                                    {isDragActive ? (
+                                      <>
+                                        <PlusSquare />
+                                        <p>Drop Your Files here</p>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <Plus />
+                                        <p>Upload Files</p>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="absolute bottom-3 w-full text-center text-sm">
+                                    <span>Upload Single image at a time </span>
+                                  </div>
                                 </div>
-                                <div className="absolute bottom-3 w-full text-center text-sm">
-                                  <span>Upload Single image at a time </span>
-                                </div>
-                              </div>
-                            </>
-                          )}
+                              </>
+                            )}
+                          </div>
+                          <div className="xl:hidden">
+                            <Button
+                              type="button"
+                              className="w-full"
+                              variant={"btn-primary"}
+                              onClick={open}
+                            >
+                              Open Explorer
+                            </Button>
+                          </div>
                         </div>
                         {files.length && (
                           <section className="mt-10">
@@ -274,7 +269,7 @@ const ProductNav = () => {
                                 onClick={() => removeAll()}
                                 className="w-full "
                               >
-                                Remove all
+                                Remove
                               </Button>
                             )}
                           </section>

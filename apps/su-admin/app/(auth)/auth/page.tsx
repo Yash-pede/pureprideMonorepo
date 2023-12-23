@@ -1,7 +1,6 @@
 "use client"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/shadCnComponents";
-import LoginForm from "./components/LoginForm";
-import SignUpForm from "./components/SignUpForm";
+import { LoginForm, SignInForm } from "@repo/ui/components";
 
 const AuthComponent = () => {
   return (
@@ -15,7 +14,7 @@ const AuthComponent = () => {
           <LoginForm />
         </TabsContent>
         <TabsContent value="SignUp">
-          <SignUpForm />
+          <SignInForm />
         </TabsContent>
       </Tabs>
     </div>

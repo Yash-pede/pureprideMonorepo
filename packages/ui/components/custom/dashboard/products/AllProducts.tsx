@@ -56,7 +56,7 @@ const AllProducts = () => {
                       alt={product.name}
                       width={200}
                       height={200}
-                      className="w-full h-full inset-0 rounded-xl"
+                      className="object-cover w-full max-h-36 inset-0 rounded-lg"
                     />
                     <h2 className="truncate">{product.name}</h2>
                   </CardTitle>

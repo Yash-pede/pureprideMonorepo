@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -10,7 +11,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/ui/shadCnComponents";
+} from "../../ui/form";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -20,10 +21,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@repo/ui/shadCnComponents";
-import { Input } from "@repo/ui/shadCnComponents";
-import { Button } from "@repo/ui/shadCnComponents";
-import { Alert, AlertDescription, AlertTitle } from "@repo/ui/shadCnComponents";
+} from "../../ui/alert-dialog";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
 import {
   AlertTriangle,
   Check,

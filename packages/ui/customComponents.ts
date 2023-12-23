@@ -7,6 +7,8 @@ import ProductNav from "./components/custom/dashboard/products/ProductNav";
 import ComboboxDemo from "./components/custom/dashboard/users/UserType";
 import Loader from "./components/custom/loader";
 import ThemeSwitcher from "./components/custom/utils/ThemeSwitcher";
+import LoginForm from "./components/custom/auth/LoginForm";
+import SignInForm from "./components/custom/auth/SignUpForm";
 
 export {
   NavbarSite,
@@ -18,4 +20,6 @@ export {
   ComboboxDemo,
   Loader,
   ThemeSwitcher,
+  LoginForm,
+  SignInForm,
 };
