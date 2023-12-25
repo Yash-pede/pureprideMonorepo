@@ -22,22 +22,29 @@
     "packages/*"
   ],
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.0",
     "@tanstack/react-query": "^5.14.1",
     "@tanstack/react-query-devtools": "^5.14.5",
-    "@tanstack/react-table": "^8.11.0",
+    "@tanstack/react-table": "^8.11.2",
     "axios": "^1.6.2",
+    "date-fns": "^3.0.6",
     "dotenv-cli": "^7.3.0",
+    "drizzle-orm": "^0.29.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.300.0",
     "next": "^14.0.4",
     "next-themes": "^0.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-hook-form": "^7.49.2",
     "sass": "^1.69.5",
     "sharp": "^0.33.1",
-    "sonner": "^1.2.4"
+    "sonner": "^1.2.4",
+    "vaul": "^0.8.0"
   }
 }

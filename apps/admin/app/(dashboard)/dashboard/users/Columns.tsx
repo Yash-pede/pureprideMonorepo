@@ -11,7 +11,6 @@ import {
   CalendarCheck2,
   Delete,
   DeleteIcon,
-  EyeOff,
   TypeIcon,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -182,28 +181,6 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
     },
   },
   {
-    accessorKey: "id",
-    maxSize: 5,
-    size: 4,
-    enableResizing: false,
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => {
-            column.toggleVisibility(!column.getIsVisible());
-            if (column.getSize() >= 50) {
-              column.toggleVisibility(false);
-            }
-          }}
-        >
-          ID
-          <EyeOff className="ml-3 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <p className="truncate w-[50%]">{row.getValue("id")}</p>,
-    enableSorting: false,
-    enableHiding: true,
+    accessorKey: "id", enableHiding: true,
   },
 ];

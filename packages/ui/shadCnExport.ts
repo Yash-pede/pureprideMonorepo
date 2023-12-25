@@ -1,4 +1,5 @@
 export * from "./components/ui/button";
+export * from "./components/ui/badge";
 export * from "./components/ui/alert";
 export * from "./components/ui/alert-dialog";
 export * from "./components/ui/avatar";
@@ -19,3 +20,6 @@ export * from "./components/ui/toaster";
 export * from "./components/ui/use-toast";
 export * from "./components/ui/card";
 export * from "./components/ui/skeleton";
+export * from "./components/ui/calendar";
+export * from "./components/ui/drawer";
+export * from "./components/ui/dialog";

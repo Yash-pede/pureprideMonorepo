@@ -535,8 +535,8 @@ export const menuItems: {
     icon: LucideUser,
   },
   {
-    name: "Invoices",
-    href: "invoices",
+    name: "Stocks",
+    href: "stocks",
     icon: LucideFileText,
   },
 ];

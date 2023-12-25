@@ -1,4 +1,4 @@
-import { pgTable, unique, pgEnum, uuid, timestamp, text, foreignKey, bigint } from "drizzle-orm/pg-core"
+import { pgTable, unique, pgEnum, uuid, timestamp, text, foreignKey, bigint, date } from "drizzle-orm/pg-core"
   import { sql } from "drizzle-orm"
 
 export const keyStatus = pgEnum("key_status", ['default', 'valid', 'invalid', 'expired'])
@@ -44,8 +44,18 @@ export const products = pgTable("products", {
 
 export const cart = pgTable("cart", {
 	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	user: uuid("user").primaryKey().notNull().references(() => profiles.id, { onDelete: "cascade", onUpdate: "cascade" } ),
+	user: uuid("user").references(() => profiles.id, { onDelete: "cascade", onUpdate: "cascade" } ),
 	product: uuid("product").references(() => products.id, { onDelete: "cascade", onUpdate: "cascade" } ),
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	quantity: bigint("quantity", { mode: "number" }).notNull(),
+	id: uuid("id").notNull(),
+});
+
+export const productBatches = pgTable("product_batches", {
+	productId: uuid("product_id").references(() => products.id, { onUpdate: "cascade" } ),
+	batchNo: text("batchNo").primaryKey().notNull(),
+	expiryDate: date("expiryDate"),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	quantity: bigint("quantity", { mode: "number" }),
 });

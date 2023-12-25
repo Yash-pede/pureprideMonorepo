@@ -14,6 +14,17 @@ export const addProductFormSchema = z.object({
   image: z.string().optional(),
 });
 
+export const addingStockFormSchema = z.object({
+  batchNo: z.string().describe("Batch No").min(1, "Batch No too short"),
+  expiryDate: z
+    .date()
+    .describe("Expiry Date"),
+  quantity: z
+    .string()
+    .describe("Quantity")
+    .min(1, "Quantity too short"),
+})
+
 export interface ExtendedFile extends File {
   preview: string;
 }

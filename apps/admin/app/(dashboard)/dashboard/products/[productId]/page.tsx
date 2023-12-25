@@ -1,13 +1,17 @@
 "use client";
 import { products } from "@repo/shared/types";
-import { Button } from "@repo/ui/shadCnComponents";
+import { Badge, Button } from "@repo/ui/shadCnComponents";
 import { formatDate } from "@repo/ui/shadCnUtils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { PlusCircle } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import AddStock from "../../../../../components/AddStock";
 
 const Product = ({ params }: { params: { productId: string } }) => {
+  const [addProductSheet, setAddProductSheet] = useState(false);
   const { data: product, isLoading } = useQuery({
     queryKey: ["product"],
     queryFn: async () => {
@@ -17,13 +21,26 @@ const Product = ({ params }: { params: { productId: string } }) => {
       return response.data.product as products;
     },
   });
-  console.log(product);
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+  const router = useRouter();
+  if (!product) {
+    router.back();
+    return <div>Product not found</div>;
+  }
+  // console.log(product);
   return (
     <section className=" body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-            <h2 className="text-sm title-font  tracking-widest">PUREPRIDE</h2>
+            <Badge
+              className="text-sm title-font  tracking-widest"
+              variant={"default"}
+            >
+              PUREPRIDE
+            </Badge>
             <h1 className=" text-3xl title-font font-medium mb-4">
               {product?.name}
             </h1>
@@ -45,7 +62,13 @@ const Product = ({ params }: { params: { productId: string } }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl ">₹ 58.00</span>
-              <Button className="ml-auto">add to cart</Button>
+              <Button
+                className="ml-auto gap-5"
+                variant={"default"}
+                onClick={() => setAddProductSheet((prev) => !prev)}
+              >
+                Add stock <PlusCircle />
+              </Button>
             </div>
           </div>
           <Image
@@ -60,6 +83,12 @@ const Product = ({ params }: { params: { productId: string } }) => {
           />
         </div>
       </div>
+      <AddStock
+        openSheet={addProductSheet}
+        setOpenSheet={setAddProductSheet}
+        Productname={product.name}
+        id={product?.id}
+      />
     </section>
   );
 };
