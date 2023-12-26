@@ -1,6 +1,16 @@
 "use client";
 import { products } from "@repo/shared/types";
-import { Button } from "@repo/ui/shadCnComponents";
+import {
+  Button,
+  Input,
+  Label,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@repo/ui/shadCnComponents";
 import { formatDate } from "@repo/ui/shadCnUtils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -8,6 +18,7 @@ import Image from "next/image";
 import React from "react";
 
 const Product = ({ params }: { params: { productId: string } }) => {
+  const [open, setOpen] = React.useState(false);
   const { data: product, isLoading } = useQuery({
     queryKey: ["product"],
     queryFn: async () => {
@@ -45,7 +56,9 @@ const Product = ({ params }: { params: { productId: string } }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl ">₹ 58.00</span>
-              <Button className="ml-auto">add to cart</Button>
+              <Button className="ml-auto" onClick={() => setOpen(true)}>
+                add to cart
+              </Button>
             </div>
           </div>
           <Image
@@ -60,6 +73,17 @@ const Product = ({ params }: { params: { productId: string } }) => {
           />
         </div>
       </div>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Order Products</SheetTitle>
+            <SheetDescription>
+              <Label>Quantity to order </Label>
+              <Input />
+            </SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
     </section>
   );
 };

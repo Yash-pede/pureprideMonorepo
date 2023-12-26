@@ -16,14 +16,9 @@ export const addProductFormSchema = z.object({
 
 export const addingStockFormSchema = z.object({
   batchNo: z.string().describe("Batch No").min(1, "Batch No too short"),
-  expiryDate: z
-    .date()
-    .describe("Expiry Date"),
-  quantity: z
-    .string()
-    .describe("Quantity")
-    .min(1, "Quantity too short"),
-})
+  expiryDate: z.date().describe("Expiry Date"),
+  quantity: z.string().describe("Quantity").min(1, "Quantity too short"),
+});
 
 export interface ExtendedFile extends File {
   preview: string;
@@ -36,4 +31,12 @@ export interface products {
   price: number | null;
   description: string | null;
   imageUrl: string;
+}
+
+export interface stockProducts {
+  batchNo: string;
+  expiryDate: Date;
+  quantity: number;
+  productId: string;
+  createdAt: Date;
 }
