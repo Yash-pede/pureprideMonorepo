@@ -26,7 +26,7 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps)  => {
     <aside className={cn("w-64 px-4 h-screen dark:backdrop-brightness-90")}>
       <Link href={"/"} className="flex flex-col items-center gap-1 text-3xl font-bold text-center py-4 border-b border-b-slate-700 dark:border-b-slate-700">
         PurePride
-      <Badge variant={"secondary"} className="ml-auto">{appName}</Badge>
+      <Badge variant={"secondary"} className="xl:ml-auto">{appName}</Badge>
       </Link>
       <section className="mt-4 space-y-6">
         {menuItems.map((item) => (

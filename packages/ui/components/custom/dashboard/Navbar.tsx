@@ -49,7 +49,7 @@ import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
 
-const Navbar = () => {
+const Navbar = ({ appName }: { appName: string }) => {
   const [isnavMenuOpen, setIsnavMenuOpen] = useState(false);
   const supabase = createClientComponentClient();
 
@@ -78,7 +78,7 @@ const Navbar = () => {
             <MenuIcon />
           </SheetTrigger>
           <SheetContent side="left" className="w-full xs:w-[80%]">
-            <Sidebar toggleNavMenu={toggleNavMenu} />
+            <Sidebar toggleNavMenu={toggleNavMenu} appName={appName} />
           </SheetContent>
         </Sheet>
 

@@ -29,7 +29,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
       </div>
 
       <div className="flex-1 overflow-auto dark:border-neutral-700/70 border-l-[1px] w-full relative">
-        <Navbar/>
+        <Navbar appName="Superadmin"/>
         <main className="p-3 mt-3">{children}</main>
       </div>
     </div>
