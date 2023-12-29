@@ -23,6 +23,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "../../../ui/form";
 import { useForm } from "react-hook-form";
@@ -33,6 +34,7 @@ import Image from "next/image";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
+import BtnBlur from "../../Handmade/BtnBlur";
 
 const ProductNav = () => {
   const supabase = createClientComponentClient();
@@ -79,6 +81,7 @@ const ProductNav = () => {
     resolver: zodResolver(addProductFormSchema),
     defaultValues: {
       name: "",
+      price: "0",
       description: "",
       image: "",
     },
@@ -113,7 +116,7 @@ const ProductNav = () => {
             {
               id: uuidv4(),
               name: data.name,
-              price: 0,
+              price: Number.parseInt(data.price.toString()),
               description: data.description,
               imageURL: ProductImageAdded.path,
               updated_at: new Date(),
@@ -138,15 +141,19 @@ const ProductNav = () => {
       <h1 className="text-3xl font-bold mb-5 text-left ">Products</h1>
       <Sheet>
         <SheetTrigger>
-          <Button variant="default" size="sm" className="gap-2">
+          {/* <Button variant="default" size="sm" className="gap-2">
             <PlusCircle />
             Add Product
-          </Button>
+          </Button> */}
+          <BtnBlur className="gap-2 flex items-center " >
+            <PlusCircle />
+            Add Product
+          </BtnBlur>
         </SheetTrigger>
         <SheetContent className="w-[100%] lg:w-[50%] xl:w-[40%]">
           <SheetHeader>
             <SheetTitle>Creating new Products</SheetTitle>
-            <SheetDescription>
+            {/* <SheetDescription> */}
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -180,6 +187,24 @@ const ProductNav = () => {
                             placeholder="Product Description"
                             {...field}
                             onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        {/* <FormLabel>Price</FormLabel> */}
+                        <FormControl>
+                          <Input
+                            placeholder="Product Price"
+                            {...field}
+                            onChange={field.onChange}
+                            type="number"
                           />
                         </FormControl>
                         <FormMessage />
@@ -294,7 +319,7 @@ const ProductNav = () => {
                   </Button>
                 </form>
               </Form>
-            </SheetDescription>
+            {/* </SheetDescription> */}
           </SheetHeader>
         </SheetContent>
       </Sheet>

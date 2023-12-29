@@ -11,6 +11,7 @@ export const addProductFormSchema = z.object({
     .string()
     .describe("Product Description")
     .min(1, "Description too short"),
+  price: z.string().describe("Price").min(1, "Price too short"),
   image: z.string().optional(),
 });
 

@@ -10,6 +10,9 @@ import Loader from "./components/custom/loader";
 import ThemeSwitcher from "./components/custom/utils/ThemeSwitcher";
 import LoginForm from "./components/custom/auth/LoginForm";
 import SignInForm from "./components/custom/auth/SignUpForm";
+import AddStock from "./components/custom/dashboard/stocks/AddStock";
+import BtnBlur from "./components/custom/Handmade/BtnBlur";
+import ProductPage from "./components/custom/dashboard/products/ProductPage";
 
 export {
   NavbarSite,
@@ -23,5 +26,8 @@ export {
   ThemeSwitcher,
   LoginForm,
   SignInForm,
-  AllStockProducts
+  AllStockProducts,
+  AddStock,
+  BtnBlur,
+  ProductPage
 };

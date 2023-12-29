@@ -14,7 +14,6 @@ import {
 } from "../../../ui/card";
 import { products, stockProducts } from "@repo/shared/types";
 import { Button } from "../../../ui/button";
-import { formatDate } from "../../../../config/utils";
 import { useRouter } from "next/navigation";
 
 const AllStockProducts = () => {

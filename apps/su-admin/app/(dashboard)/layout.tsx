@@ -25,12 +25,12 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-screen">
       <div className="hidden md:block">
-        <Sidebar />
+        <Sidebar appName="Superadmin"/>
       </div>
 
       <div className="flex-1 overflow-auto dark:border-neutral-700/70 border-l-[1px] w-full relative">
-        <Navbar />
-        <main className="p-3">{children}</main>
+        <Navbar/>
+        <main className="p-3 mt-3">{children}</main>
       </div>
     </div>
   );

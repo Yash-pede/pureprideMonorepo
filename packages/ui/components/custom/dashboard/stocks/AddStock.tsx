@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -162,6 +163,7 @@ const AddStock = ({
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
                       <Calendar
+                        required
                         mode="single"
                         selected={date}
                         onSelect={setDate}

@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import {ComboboxDemo} from "@repo/ui/components";
-import { formatDate } from "@repo/ui/shadCnUtils";
+import { format } from "date-fns";
 
 const onBan = async (id: string) => {
   const response = await axios.delete("/api/users", {
@@ -173,7 +173,7 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
       if (row.getValue("updatedAt")) {
         return (
           <p className="text-xs text-center text-muted-foreground">
-            {formatDate(row.getValue("updatedAt"))}
+            {format(row.getValue("updatedAt"),"dd/MM/yyyy HH:mm a")}
           </p>
         );
       } else {

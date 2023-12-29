@@ -62,7 +62,6 @@ const Navbar = () => {
     toast.error("Signed out");
   };
   const router = useRouter();
-
   return (
     <>
       <nav
@@ -96,7 +95,7 @@ const Navbar = () => {
                         href="/"
                       >
                         <div className="mb-2 mt-4 text-lg font-medium">
-                          PurePride
+                          PurePrides
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
                           PurePridePharma welcome to the top1% in India

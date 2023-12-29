@@ -14,8 +14,8 @@ import {
 } from "../../../ui/card";
 import { products } from "@repo/shared/types";
 import { Button } from "../../../ui/button";
-import { formatDate } from "../../../../config/utils";
 import { useRouter } from "next/navigation";
+import { format } from "date-fns";
 
 const AllProducts = () => {
   const router = useRouter()
@@ -26,6 +26,7 @@ const AllProducts = () => {
       return response.data.allProducts;
     },
   });
+
 
   return (
     <div className="w-full">
@@ -60,7 +61,7 @@ const AllProducts = () => {
                       height={200}
                       className="object-cover w-full max-h-36 inset-0 rounded-lg"
                     />
-                    <h2 className="truncate">{product.name}</h2>
+                    <p className="truncate">{product.name}</p>
                   </CardTitle>
                   <CardDescription className="truncate">
                     {product.description}
@@ -73,7 +74,7 @@ const AllProducts = () => {
                   <Button className="w-full" onClick={() => router.push(`/dashboard/products/${product.id}`)}>View</Button>
                   {product.updatedAt && (
                     <p className="text-xs text-muted-foreground text-right w-full bottom-0 mt-5">
-                      Updated at: {formatDate(product.updatedAt)}
+                      Updated at: {format((product.updatedAt),"dd MMM yyyy hh:mm a")}
                     </p>
                   )}
                 </CardFooter>
