@@ -23,7 +23,7 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps)  => {
   });
 
   return (
-    <aside className={cn("w-64 px-4 h-screen dark:backdrop-brightness-90")}>
+    <aside className={cn("md:w-64 w-full px-4")}>
       <Link href={"/"} className="flex flex-col items-center gap-1 text-3xl font-bold text-center py-4 border-b border-b-slate-700 dark:border-b-slate-700">
         PurePride
       <Badge variant={"secondary"} className="xl:ml-auto">{appName}</Badge>

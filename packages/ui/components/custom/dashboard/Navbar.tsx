@@ -213,7 +213,6 @@ const Navbar = ({ appName }: { appName: string }) => {
           </DropdownMenu>
 
           <Sheet
-            key={"right"}
             open={isnavMenuOpen}
             onOpenChange={toggleNavMenu}
           >
@@ -221,8 +220,8 @@ const Navbar = ({ appName }: { appName: string }) => {
               <MenuIcon />
             </SheetTrigger>
             <SheetContent
-              side="left"
-              className="w-full justify-center items-center flex  xs:w-[80%]"
+              side="right"
+              className="w-full justify-center items-center flex xs:w-[80%]"
             >
               <Sidebar toggleNavMenu={toggleNavMenu} appName={appName} />
             </SheetContent>
