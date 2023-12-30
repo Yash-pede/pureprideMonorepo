@@ -70,7 +70,7 @@ const Navbar = ({ appName }: { appName: string }) => {
         )}
       >
         <Link href={"/"} className={cn("justify-left")}>
-          <h1 className="text-xl font-light">{appName}</h1>
+          <h1 className="text-xl font-light md:hidden">{appName}</h1>
         </Link>
 
         <NavigationMenu className="hidden md:block">
@@ -220,7 +220,10 @@ const Navbar = ({ appName }: { appName: string }) => {
             <SheetTrigger className="md:hidden">
               <MenuIcon />
             </SheetTrigger>
-            <SheetContent side="left" className="w-full xs:w-[80%]">
+            <SheetContent
+              side="left"
+              className="w-full justify-center items-center flex  xs:w-[80%]"
+            >
               <Sidebar toggleNavMenu={toggleNavMenu} appName={appName} />
             </SheetContent>
           </Sheet>
