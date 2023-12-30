@@ -1,5 +1,6 @@
 import { db } from "@repo/drizzle/db";
 import { productBatches } from "@repo/drizzle/schema";
+import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async () => {
@@ -19,9 +20,9 @@ export const POST = async (req: NextRequest) => {
   console.log("POST");
   try {
     const { id, batchNo, quantity, expiryDate } = await req.json();
-    console.log(id);  
+    console.log(id);
     const product = await db.insert(productBatches).values({
-     productId: id,
+      productId: id,
       batchNo: batchNo,
       expiryDate: expiryDate,
       quantity: quantity,
@@ -32,6 +33,27 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({
       success: false,
       message: err,
+    });
+  }
+};
+
+export const DELETE = async (req: NextRequest) => {
+  console.log("DELETE");
+  try {
+    const { batchNo } = await req.json();
+    const delProduct = await db
+      .delete(productBatches)
+      .where(eq(productBatches.batchNo, batchNo));
+    return NextResponse.json({
+      success: true,
+      message: "Stock deleted",
+      delProduct,
+    });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json({
+      success: false,
+      message: "Something went wrong",
     });
   }
 };

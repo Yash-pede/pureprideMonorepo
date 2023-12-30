@@ -1,13 +1,14 @@
 "use client";
-
+import React from "react";
 import { productBatches } from "@repo/drizzle/schema";
 import { Button, Checkbox, Skeleton } from "@repo/ui/shadCnComponents";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
 import { format } from "date-fns";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowRight, ArrowUpDown, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import Link from "next/link";
 // import { getProductName } from "./page";
 function getProductName(id: string) {
   try {
@@ -15,17 +16,30 @@ function getProductName(id: string) {
       queryKey: ["products"],
       queryFn: async () => {
         const response = await axios.get("/api/products");
-        return response.data.allProducts;
+        return response.data;
       },
     });
-    return data.find((product: any) => product.id === id)?.name;
+    if (data.success) {
+      return data.allProducts.find((product: any) => product.id === id)?.name;
+    } else {
+      throw new Error(data.message);
+    }
   } catch (err) {
     console.log(err);
-    toast.error("Some Error");
+    // toast.error("Some Error");
     return "Some Error";
   }
 }
-
+const delStock = async (batchNo: string) => {
+  const response = await axios.delete("/api/productStock", {
+    data: { batchNo },
+  });
+  if (response.data.success) {
+    toast.success(response.data.message);
+  } else {
+    toast.error(response.data.message);
+  }
+};
 export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
   {
     id: "select",
@@ -83,7 +97,18 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       if (productName === "Some Error") {
         return <Skeleton className="h-full w-7 rounded-md"></Skeleton>;
       } else {
-        return <div className="lowercase truncate">{productName}</div>;
+        return (
+          <div className="lowercase truncate flex items-center gap-1 w-full justify-between">
+            <div className="max-w-32 truncate">{productName}</div>
+
+            <Link
+              href={"/dashboard/products/" + row.getValue("productId")}
+              className="justify-self-end border border-input rounded-lg p-1 cursor-pointer hover:bg-card bg-muted transition-all duration-200"
+            >
+              <ArrowRight />
+            </Link>
+          </div>
+        );
       }
     },
   },
@@ -100,7 +125,28 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("quantity")}</div>
+      <div className="lowercase text-center">{row.getValue("quantity")}</div>
+    ),
+  },
+  {
+    accessorKey: "del_Stock",
+    header: ({ column }) => {
+      return (
+        <Button variant="ghost" size={"icon"}>
+          <Trash2 className="text-rose-600 hover:text-rose-700" />
+          <span>Stock</span>
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <Button
+        variant="outline"
+        size={"icon"}
+        onClick={() => delStock(row.getValue("batchNo"))}
+        className=" bg-destructive hover:bg-destructive/80 text-white hover:text-white/80"
+      >
+        <Trash2 className="p-1 rounded" />
+      </Button>
     ),
   },
   {
@@ -116,7 +162,9 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{format(row.getValue("createdAt"), "P")}</div>
+      <div className="lowercase text-center">
+        {format(row.getValue("createdAt"), "P")}
+      </div>
     ),
   },
   {
@@ -132,7 +180,11 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{format(row.getValue("expiryDate"), "P")}</div>
+      <div className="lowercase text-center">
+        {format(row.getValue("expiryDate"), "P")}
+      </div>
     ),
   },
 ];
+
+export default columns;

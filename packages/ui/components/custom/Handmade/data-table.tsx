@@ -69,7 +69,7 @@ function DataTable<TData, TValue>({
     return () => {
       supabaseUsers.removeChannel(channel);
     };
-  }, [router, supabaseUsers]);
+  }, [router.refresh, supabaseUsers,table.getRowModel().rows.length]);
   return (
     <section className="w-full h-full relative">
       <DropdownMenu>

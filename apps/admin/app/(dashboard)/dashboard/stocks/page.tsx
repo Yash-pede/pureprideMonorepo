@@ -4,8 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { columns } from "./columns";
-import { DataTable } from "@repo/ui/components";
+import { DataTable, columns } from "@repo/ui/components";
 
 const Stocks = () => {
   const [productsdata, setData] = useState([]);
