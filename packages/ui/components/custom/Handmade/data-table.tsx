@@ -29,11 +29,13 @@ import { useRouter } from "next/navigation";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  tableName: string;
 }
 
-export function DataTable<TData, TValue>({
+function DataTable<TData, TValue>({
   columns,
   data,
+  tableName,
 }: DataTableProps<TData, TValue>) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -51,13 +53,13 @@ export function DataTable<TData, TValue>({
   const supabaseUsers = createClientComponentClient();
   useEffect(() => {
     const channel = supabaseUsers
-      .channel("relatime users")
+      .channel("relatime_" + tableName)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
-          table: "profiles",
+          table: tableName,
         },
         () => {
           router.refresh();
@@ -70,8 +72,11 @@ export function DataTable<TData, TValue>({
   }, [router, supabaseUsers]);
   return (
     <section className="w-full h-full relative">
-      <DropdownMenu >
-        <DropdownMenuTrigger className="ml-auto absolute right-0 -top-16" asChild>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          className="ml-auto absolute right-0 -top-16"
+          asChild
+        >
           <Button variant="outline" className="ml-auto">
             Columns
           </Button>
@@ -147,3 +152,5 @@ export function DataTable<TData, TValue>({
     </section>
   );
 }
+
+export default DataTable;

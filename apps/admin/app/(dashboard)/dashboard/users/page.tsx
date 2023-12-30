@@ -1,11 +1,11 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { columns } from "./Columns";
-import { DataTable } from "./data-table";
 import axios from "axios";
 import { Dot } from "lucide-react";
 import { Button } from "@repo/ui/shadCnComponents";
 import { Skeleton } from "@repo/ui/shadCnComponents";
+import { DataTable } from "@repo/ui/components";
 
 export default function Users() {
   const { data, status } = useQuery({
@@ -28,7 +28,7 @@ export default function Users() {
        
       
       {status == "success" ? (
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={columns} data={data} tableName="profiles" />
       ) : (
         <div className="space-y-3">
           <Skeleton className="h-12 w-full" />

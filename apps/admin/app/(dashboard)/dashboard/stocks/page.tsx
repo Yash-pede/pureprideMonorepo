@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { DataTable } from "../users/data-table";
 import { columns } from "./columns";
+import { DataTable } from "@repo/ui/components";
 
 const Stocks = () => {
   const [productsdata, setData] = useState([]);
@@ -31,7 +31,7 @@ const Stocks = () => {
         <div>Loading</div>
       ) : (
         <main className="mx-auto">
-          <DataTable columns={columns} data={productsdata} />
+          <DataTable columns={columns} data={productsdata} tableName="product_batches" />
         </main>
       )}
     </section>

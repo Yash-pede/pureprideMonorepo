@@ -14,6 +14,7 @@ import AddStock from "./components/custom/dashboard/stocks/AddStock";
 import BtnBlur from "./components/custom/Handmade/BtnBlur";
 import ProductPage from "./components/custom/dashboard/products/ProductPage";
 import DarkmodeGradiant from "./components/custom/utils/DarkModeGradiant";
+import DataTable from "./components/custom/Handmade/data-table";
 
 export {
   NavbarSite,
@@ -32,4 +33,5 @@ export {
   BtnBlur,
   ProductPage,
   DarkmodeGradiant,
+  DataTable
 };
