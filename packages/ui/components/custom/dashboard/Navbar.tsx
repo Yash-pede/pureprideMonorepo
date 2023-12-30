@@ -66,21 +66,12 @@ const Navbar = ({ appName }: { appName: string }) => {
     <>
       <nav
         className={cn(
-          "flex px-2 w-full items-center justify-between py-2 md:py-4 border-b-[1px] dark:border-b-slate-700/40 "
+          "sticky top-0 inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 z-40 flex px-2 w-full items-center justify-between py-2 md:py-4 border-b-[1px] dark:border-b-slate-700/40"
         )}
       >
-        <Link href={"/"} className={cn("justify-left hidden md:block")}>
-          {/* <Image src={logo} width={130} height={130} alt="purepride Logo" /> */}
+        <Link href={"/"} className={cn("justify-left")}>
+          <h1 className="text-xl font-light">{appName}</h1>
         </Link>
-
-        <Sheet key={"right"} open={isnavMenuOpen} onOpenChange={toggleNavMenu}>
-          <SheetTrigger className="md:hidden">
-            <MenuIcon />
-          </SheetTrigger>
-          <SheetContent side="left" className="w-full xs:w-[80%]">
-            <Sidebar toggleNavMenu={toggleNavMenu} appName={appName} />
-          </SheetContent>
-        </Sheet>
 
         <NavigationMenu className="hidden md:block">
           <NavigationMenuList>
@@ -220,6 +211,19 @@ const Navbar = ({ appName }: { appName: string }) => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          <Sheet
+            key={"right"}
+            open={isnavMenuOpen}
+            onOpenChange={toggleNavMenu}
+          >
+            <SheetTrigger className="md:hidden">
+              <MenuIcon />
+            </SheetTrigger>
+            <SheetContent side="left" className="w-full xs:w-[80%]">
+              <Sidebar toggleNavMenu={toggleNavMenu} appName={appName} />
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
     </>

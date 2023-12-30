@@ -16,7 +16,6 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@10.2.4",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -46,5 +45,10 @@
     "sharp": "^0.33.1",
     "sonner": "^1.2.4",
     "vaul": "^0.8.0"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }

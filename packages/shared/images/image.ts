@@ -51,6 +51,10 @@ import userSales from "./refImages/user-sales.svg";
 import userDistributor from "./refImages/user-dist.svg";
 import userAdmin from "./refImages/user-admin.svg";
 import mediTemp from"./refImages/mediTemp.jpg";
+
+import left from "./ui/left.png"
+import right from "./ui/right.png"
+
 export {
   mediTemp,
   home,
@@ -99,4 +103,6 @@ export {
   userAdmin,
   userSales,
   userDistributor,
+  left,
+  right
 };

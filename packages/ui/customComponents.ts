@@ -13,6 +13,7 @@ import SignInForm from "./components/custom/auth/SignUpForm";
 import AddStock from "./components/custom/dashboard/stocks/AddStock";
 import BtnBlur from "./components/custom/Handmade/BtnBlur";
 import ProductPage from "./components/custom/dashboard/products/ProductPage";
+import DarkmodeGradiant from "./components/custom/utils/DarkModeGradiant";
 
 export {
   NavbarSite,
@@ -29,5 +30,6 @@ export {
   AllStockProducts,
   AddStock,
   BtnBlur,
-  ProductPage
+  ProductPage,
+  DarkmodeGradiant,
 };

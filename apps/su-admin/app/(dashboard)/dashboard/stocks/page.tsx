@@ -30,7 +30,7 @@ const Stocks = () => {
       {isLoading ? (
         <div>Loading</div>
       ) : (
-        <main className="mx-auto">
+        <main className="mx-auto w-full overflow-auto">
           <DataTable columns={columns} data={productsdata} />
         </main>
       )}
