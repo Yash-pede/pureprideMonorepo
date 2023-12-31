@@ -19,8 +19,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "@repo/ui/shadCnComponents";
-import { cn } from "@repo/ui/shadCnUtils";
+} from "../../../../shadCnExport";
+import { cn } from "../../../../config/utils";
 import { format } from "date-fns/format";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";

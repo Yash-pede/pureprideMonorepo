@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { productBatches } from "@repo/drizzle/schema";
-import { Button, Checkbox, Skeleton } from "@repo/ui/shadCnComponents";
+import { Button, Checkbox, Skeleton } from "../../../../shadCnExport";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
@@ -9,33 +9,52 @@ import { format } from "date-fns";
 import { ArrowRight, ArrowUpDown, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
-// import { getProductName } from "./page";
+
+const deletedStocks: string[] = [];
+const isDeleted = (batch: string) => deletedStocks.includes(batch);
 function getProductName(id: string) {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const response = await axios.get("/api/products");
+      return response.data;
+    },
+  });
+
+  if (isLoading) {
+    // Loading state
+    return <Skeleton className="h-full w-7 rounded-md"></Skeleton>;
+  }
+
+  if (isError) {
+    // Error state
+    return <div>Error loading data</div>;
+  }
+
   try {
-    const { data } = useQuery({
-      queryKey: ["products"],
-      queryFn: async () => {
-        const response = await axios.get("/api/products");
-        return response.data;
-      },
-    });
+    if (!data) {
+      // Data is undefined
+      return null;
+    }
+
     if (data.success) {
       return data.allProducts.find((product: any) => product.id === id)?.name;
     } else {
       throw new Error(data.message);
     }
   } catch (err) {
-    console.log(err);
-    // toast.error("Some Error");
-    return "Some Error";
+    console.error(err);
+    return null;
   }
 }
+
 const delStock = async (batchNo: string) => {
   const response = await axios.delete("/api/productStock", {
     data: { batchNo },
   });
   if (response.data.success) {
     toast.success(response.data.message);
+    deletedStocks.push(batchNo);
   } else {
     toast.error(response.data.message);
   }
@@ -82,36 +101,42 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
   },
   {
     accessorKey: "productId",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          product name
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        product name
+      </Button>
+    ),
     cell: ({ row }) => {
       const productName = getProductName(row.getValue("productId"));
-      if (productName === "Some Error") {
-        return <Skeleton className="h-full w-7 rounded-md"></Skeleton>;
-      } else {
-        return (
-          <div className="lowercase truncate flex items-center gap-1 w-full justify-between">
-            <div className="max-w-32 truncate">{productName}</div>
+      const batchNo: string = row.getValue("batchNo");
+      const isDeleted = deletedStocks.includes(batchNo);
 
-            <Link
-              href={"/dashboard/products/" + row.getValue("productId")}
-              className="justify-self-end border border-input rounded-lg p-1 cursor-pointer hover:bg-card bg-muted transition-all duration-200"
-            >
-              <ArrowRight />
-            </Link>
-          </div>
-        );
+      if (!productName) {
+        return <Skeleton className="h-4 w-20" />;
       }
+
+      return (
+        <div
+          className={`lowercase truncate flex items-center gap-1 w-full justify-between ${
+            isDeleted ? "line-through" : "" 
+          }`}
+        >
+          <div className="max-w-32 truncate">{productName}</div>
+
+          <Link
+            href={"/dashboard/products/" + row.getValue("productId")}
+            className="justify-self-end border border-input rounded-lg p-1 cursor-pointer hover:bg-card bg-muted transition-all duration-200"
+          >
+            <ArrowRight />
+          </Link>
+        </div>
+      );
     },
   },
+
   {
     accessorKey: "quantity",
     header: ({ column }) => {
@@ -125,7 +150,7 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase text-center">{row.getValue("quantity")}</div>
+      <div className="lowercase">{row.getValue("quantity")}</div>
     ),
   },
   {
@@ -162,7 +187,7 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase text-center">
+      <div className="lowercase text-center md:text-left">
         {format(row.getValue("createdAt"), "P")}
       </div>
     ),
@@ -180,7 +205,7 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase text-center">
+      <div className="lowercase text-center md:text-left">
         {format(row.getValue("expiryDate"), "P")}
       </div>
     ),

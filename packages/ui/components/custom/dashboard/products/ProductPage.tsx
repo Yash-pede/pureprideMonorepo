@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import AddStock from "../stocks/AddStock";
 import { Badge } from "../../../ui/badge";
 import { toast } from "sonner";
+import RolecheckSuAdmin from "../../auth/HOC/Rolecheck";
 
 const ProductPage = ({ productId }: { productId: string }) => {
   const router = useRouter();
