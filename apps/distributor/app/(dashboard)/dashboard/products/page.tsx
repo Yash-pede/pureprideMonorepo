@@ -1,5 +1,3 @@
-"use client";
-
 import { AllStockProducts } from "@repo/ui/components";
 
 const Products = () => {

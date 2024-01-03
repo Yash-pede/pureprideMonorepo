@@ -18,16 +18,24 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   console.log("DELETE");
-  console.log(await req.json())
-  // try {
-  //   const {id} = await req.json();
-  //   const product = await db.delete(products).where(eq(products.id, id));
-  //   return NextResponse.json({ success: true, product: product[0] });
-  // } catch (err) {
-  //   console.log(err);
-    return NextResponse.json({
-      success: false,
-      message: "Something went wrong",
-    });
-  // }
+  try {
+    const { id } = await req.json();
+    const product = await db.delete(products).where(eq(products.id, id));
+    return NextResponse.json({ success: true, message: "Product deleted"});
+  } catch (err) {
+    console.log(err);
+    if (err.code == 23503) {
+      return NextResponse.json({
+        success: false,
+        message: "please clear all the reference of this product",
+        err,
+      });
+    } else {
+      return NextResponse.json({
+        success: false,
+        message: "Something went wrong",
+        err,
+      });
+    }
+  }
 };

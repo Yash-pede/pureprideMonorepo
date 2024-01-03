@@ -107,7 +107,7 @@ const ProductNav = () => {
           throw ImageError;
         }
         if (ProductImageAdded) {
-          console.log(ProductImageAdded);
+          // console.log(ProductImageAdded);
           toast.success("Product Image Added");
         }
         const { data: ProductAdded, error } = await supabase

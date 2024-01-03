@@ -12,9 +12,11 @@ import AddStock from "../stocks/AddStock";
 import { Badge } from "../../../ui/badge";
 import { toast } from "sonner";
 import RolecheckSuAdmin from "../../auth/HOC/Rolecheck";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const ProductPage = ({ productId }: { productId: string }) => {
   const router = useRouter();
+  const supabase = createClientComponentClient();
   const [addProductSheet, setAddProductSheet] = useState(false);
   const {
     data: product,
@@ -42,7 +44,29 @@ const ProductPage = ({ productId }: { productId: string }) => {
     router.back();
     return <div>Product not found</div>;
   }
-
+  const handleDeleteProduct = async () => {
+    try {
+      const response = await axios.delete(`/api/products`, {
+        data: {
+          id: product.id,
+        },
+      });
+      if (response.data.success) {
+        toast.success(response.data.message);
+        console.log();
+        const { data, error } = await supabase.storage
+          .from("Products")
+          .remove([product.imageUrl]);
+        //  console.log(data);
+        //  console.log(error);
+        router.back();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
   // console.log(product);
   return (
     <section className="">
@@ -90,6 +114,13 @@ const ProductPage = ({ productId }: { productId: string }) => {
                 Add stock <PlusCircle />
               </Button>
             </div>
+            <Button
+              className="ml-auto gap-5 my-3"
+              variant={"destructive"}
+              onClick={() => handleDeleteProduct()}
+            >
+              Delete
+            </Button>
           </div>
           <Image
             src={

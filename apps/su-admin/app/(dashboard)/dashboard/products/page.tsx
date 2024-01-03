@@ -1,5 +1,3 @@
-"use client";
-
 import { AllProducts, ProductNav } from "@repo/ui/components";
 
 const Products = () => {

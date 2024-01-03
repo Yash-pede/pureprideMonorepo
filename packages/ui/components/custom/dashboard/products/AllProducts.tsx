@@ -16,38 +16,39 @@ import { products } from "@repo/shared/types";
 import { Button } from "../../../ui/button";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
+import Notfound from "../../Handmade/Notfound/Notfound";
 
 const AllProducts = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const response = await axios.get("/api/products");
-      return response.data.allProducts;
+      console.log(response.data);
+      return response.data.allProducts || [];
     },
   });
-
 
   return (
     <div className="w-full">
       {isLoading ? (
         <div className="flex flex-row gap-7 flex-wrap xl:justify-start justify-center items-center">
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
-          <Skeleton className="w-[300px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
         </div>
       ) : (
-        <section className="flex flex-row gap-7 flex-wrap xl:justify-start justify-center items-center">
-          {data &&
+        <section className="md:flex flex-row gap-7 grid grid-cols-2 place-items-center flex-wrap xl:justify-start justify-center items-center">
+          {Array.isArray(data) && data.length > 0 ? (
             data.map((product: products) => (
               <Card
                 key={product.id}
-                className="xl:w-[300px] w-[250px] bg-card shadow-lg hover:scale-105 duration-300 transition-all"
+                className="xl:w-[300px] md:w-[250px] max-w-[110%] bg-card shadow-lg hover:scale-105 duration-300 transition-all"
               >
                 <CardHeader>
                   <CardTitle className="space-y-4">
@@ -71,15 +72,29 @@ const AllProducts = () => {
                   <p className="text-lg "> &#8377;{product.price}</p>
                 </CardContent>
                 <CardFooter className="flex flex-col gap-1">
-                  <Button className="w-full" onClick={() => router.push(`/dashboard/products/${product.id}`)}>View</Button>
+                  <Button
+                    className="w-full"
+                    onClick={() =>
+                      router.push(`/dashboard/products/${product.id}`)
+                    }
+                  >
+                    View
+                  </Button>
                   {product.updatedAt && (
                     <p className="text-xs text-muted-foreground text-right w-full bottom-0 mt-5">
-                      Updated at: {format((product.updatedAt),"dd MMM yyyy hh:mm a")}
+                      Updated at:{" "}
+                      {format(product.updatedAt, "dd MMM yyyy hh:mm a")}
                     </p>
                   )}
                 </CardFooter>
               </Card>
-            ))}
+            ))
+          ) : (
+            <div className="flex flex-col justify-center items-center">
+              <p className="text-3xl font-bold text-center w-full">No products Found</p>
+            <Notfound />
+            </div>
+          )}
         </section>
       )}
     </div>

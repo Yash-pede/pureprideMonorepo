@@ -17,6 +17,7 @@ import DarkmodeGradiant from "./components/custom/utils/DarkModeGradiant";
 import DataTable from "./components/custom/Handmade/data-table";
 import columns from "./components/custom/dashboard/stocks/columns";
 import RolecheckSuAdmin from "./components/custom/auth/HOC/Rolecheck";
+import Notfound from "./components/custom/Handmade/Notfound/Notfound";
 
 export {
   NavbarSite,
@@ -37,5 +38,6 @@ export {
   DarkmodeGradiant,
   DataTable,
   columns,
-  RolecheckSuAdmin
+  RolecheckSuAdmin,
+  Notfound,
 };
