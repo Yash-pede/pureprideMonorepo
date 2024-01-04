@@ -126,7 +126,8 @@ const ProductNav = () => {
           toast.error(error.message);
         } else {
           toast.success("Product Added as: " + data.name);
-          console.log(ProductAdded);
+
+          // console.log(ProductAdded);
         }
       } else {
         toast.error("Please select an image");
@@ -139,7 +140,7 @@ const ProductNav = () => {
   return (
     <nav className="w-full justify-between flex flex-col md:flex-row items-center mb-5">
       <h1 className="text-3xl font-bold mb-5 text-left ">Products</h1>
-      <Sheet>
+      <Sheet >
         <SheetTrigger>
           {/* <Button variant="default" size="sm" className="gap-2">
             <PlusCircle />

@@ -1,4 +1,3 @@
-"use client";
 import { Skeleton } from "../../../ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -18,16 +17,9 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import Notfound from "../../Handmade/Notfound/Notfound";
 
-const AllProducts = () => {
+const AllProducts = ({data,isLoading}:{data:products[],isLoading:boolean}) => {
   const router = useRouter();
-  const { data, isLoading } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const response = await axios.get("/api/products");
-      console.log(response.data);
-      return response.data.allProducts || [];
-    },
-  });
+
 
   return (
     <div className="w-full">
@@ -91,7 +83,7 @@ const AllProducts = () => {
             ))
           ) : (
             <div className="flex flex-col justify-center items-center">
-              <p className="text-3xl font-bold text-center w-full">No products Found</p>
+              <p className="text-2xl font-bold text-center w-full mx-auto">No products</p>
             <Notfound />
             </div>
           )}
