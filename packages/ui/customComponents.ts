@@ -18,6 +18,7 @@ import DataTable from "./components/custom/Handmade/data-table";
 import columns from "./components/custom/dashboard/stocks/columns";
 import RolecheckSuAdmin from "./components/custom/auth/HOC/Rolecheck";
 import Notfound from "./components/custom/Handmade/Notfound/Notfound";
+import CommingSoon from "./components/custom/Handmade/CommingSoon";
 
 export {
   NavbarSite,
@@ -40,4 +41,5 @@ export {
   columns,
   RolecheckSuAdmin,
   Notfound,
+  CommingSoon
 };

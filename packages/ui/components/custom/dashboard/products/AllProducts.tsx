@@ -73,7 +73,7 @@ const AllProducts = ({data,isLoading}:{data:products[],isLoading:boolean}) => {
                     View
                   </Button>
                   {product.updatedAt && (
-                    <p className="text-xs text-muted-foreground text-right w-full bottom-0 mt-5">
+                    <p className="text-sm text-muted-foreground text-right w-full bottom-0 mt-5">
                       Updated at:{" "}
                       {format(product.updatedAt, "dd MMM yyyy hh:mm a")}
                     </p>

@@ -35,9 +35,12 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import BtnBlur from "../../Handmade/BtnBlur";
+import { useRouter } from "next/navigation";
 
 const ProductNav = () => {
   const supabase = createClientComponentClient();
+  const router = useRouter();
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [files, setFiles] = useState<ExtendedFile[]>([]);
   const [rejected, setRejected] = useState<File[]>([]);
   const onDrop = useCallback(
@@ -126,7 +129,8 @@ const ProductNav = () => {
           toast.error(error.message);
         } else {
           toast.success("Product Added as: " + data.name);
-
+          setSheetOpen(false);
+          router.refresh();
           // console.log(ProductAdded);
         }
       } else {
@@ -140,12 +144,8 @@ const ProductNav = () => {
   return (
     <nav className="w-full justify-between flex flex-col md:flex-row items-center mb-5">
       <h1 className="text-3xl font-bold mb-5 text-left ">Products</h1>
-      <Sheet >
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger>
-          {/* <Button variant="default" size="sm" className="gap-2">
-            <PlusCircle />
-            Add Product
-          </Button> */}
           <BtnBlur className="gap-2 flex items-center " >
             <PlusCircle />
             Add Product

@@ -36,7 +36,6 @@ const AllStockProducts = () => {
   });
 
   React.useEffect(() => {
-    // Use the first product ID in the stocks data to find the corresponding product details
     if (data && data.length > 0 && Products) {
       const firstProductId = data[0].productId;
       const product = Products.find((product: products) => product.id === firstProductId);
@@ -44,12 +43,9 @@ const AllStockProducts = () => {
     }
   }, [data, Products]);
 
-  // Check if data is undefined or null
   if (isLoading || !data || !Products) {
     return (
       <div className="flex flex-row gap-7 flex-wrap xl:justify-start justify-center items-center">
-        {/* Add your Skeleton components or loading UI here */}
-        {/* For example: <Skeleton className="w-[300px] h-[350px]" /> */}
         Loading...
       </div>
     );
