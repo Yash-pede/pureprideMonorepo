@@ -24,18 +24,18 @@ export const DELETE = async (req: NextRequest) => {
     return NextResponse.json({ success: true, message: "Product deleted"});
   } catch (err) {
     console.log(err);
-    if (err.code == 23503) {
-      return NextResponse.json({
-        success: false,
-        message: "please clear all the reference of this product",
-        err,
-      });
-    } else {
+    // if (err.code == 23503) {
+    //   return NextResponse.json({
+    //     success: false,
+    //     message: "please clear all the reference of this product",
+    //     err,
+    //   });
+    // } else {
       return NextResponse.json({
         success: false,
         message: "Something went wrong",
         err,
       });
-    }
+    // }
   }
 };
