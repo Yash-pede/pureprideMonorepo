@@ -11,6 +11,7 @@ import ThemeSwitcher from "./components/custom/utils/ThemeSwitcher";
 import LoginForm from "./components/custom/auth/LoginForm";
 import SignInForm from "./components/custom/auth/SignUpForm";
 import AddStock from "./components/custom/dashboard/stocks/AddStock";
+import AddStockDistributor from "./components/custom/dashboard/distributor/AddStock";
 import BtnBlur from "./components/custom/Handmade/BtnBlur";
 import ProductPage from "./components/custom/dashboard/products/ProductPage";
 import DarkmodeGradiant from "./components/custom/utils/DarkModeGradiant";
@@ -41,5 +42,6 @@ export {
   columns,
   RolecheckSuAdmin,
   Notfound,
-  CommingSoon
+  CommingSoon,
+  AddStockDistributor
 };

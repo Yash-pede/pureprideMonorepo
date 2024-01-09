@@ -12,21 +12,6 @@ export const equalityOp = pgEnum("equality_op", ['eq', 'neq', 'lt', 'lte', 'gt',
 export const action = pgEnum("action", ['INSERT', 'UPDATE', 'DELETE', 'TRUNCATE', 'ERROR'])
 
 
-export const profiles = pgTable("profiles", {
-	id: uuid("id").primaryKey().notNull(),
-	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }),
-	username: text("username"),
-	fullName: text("full_name"),
-	email: text("email"),
-	role: text("role"),
-	userrole: userRoles("userrole").default('UNDEFINED'),
-},
-(table) => {
-	return {
-		profilesUsernameKey: unique("profiles_username_key").on(table.username),
-	}
-});
-
 export const products = pgTable("products", {
 	id: uuid("id").defaultRandom().primaryKey().notNull(),
 	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }),
@@ -42,13 +27,26 @@ export const products = pgTable("products", {
 	}
 });
 
+export const profiles = pgTable("profiles", {
+	id: uuid("id").primaryKey().notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }),
+	username: text("username"),
+	fullName: text("full_name"),
+	email: text("email"),
+	userrole: userRoles("userrole").default('UNDEFINED'),
+	role: text("role"),
+},
+(table) => {
+	return {
+		profilesUsernameKey: unique("profiles_username_key").on(table.username),
+	}
+});
+
 export const cart = pgTable("cart", {
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	user: uuid("user").references(() => profiles.id, { onDelete: "cascade", onUpdate: "cascade" } ),
-	product: uuid("product").references(() => products.id, { onDelete: "cascade", onUpdate: "cascade" } ),
+	user: uuid("user").references(() => profiles.id),
+	product: uuid("product").references(() => products.id),
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	quantity: bigint("quantity", { mode: "number" }).notNull(),
-	id: uuid("id").notNull(),
 });
 
 export const productBatches = pgTable("product_batches", {

@@ -48,6 +48,7 @@ import Sidebar from "./Sidebar";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
+import { Separator } from "../../ui/separator";
 
 const Navbar = ({ appName }: { appName: string }) => {
   const [isnavMenuOpen, setIsnavMenuOpen] = useState(false);
@@ -66,7 +67,7 @@ const Navbar = ({ appName }: { appName: string }) => {
     <>
       <nav
         className={cn(
-          "sticky top-0 inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 z-40 flex px-2 w-full items-center justify-between py-2 md:py-4 border-b-[1px] dark:border-b-slate-700/40"
+          "sticky top-0 inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 z-40 flex px-2 w-full items-center justify-between py-2 md:py-4"
         )}
       >
         <Link href={"/"} className={cn("justify-left")}>
@@ -225,6 +226,7 @@ const Navbar = ({ appName }: { appName: string }) => {
           </Sheet>
         </div>
       </nav>
+      <Separator/>
     </>
   );
 };

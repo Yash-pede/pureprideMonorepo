@@ -43,12 +43,9 @@ export const products = pgTable("products", {
 });
 
 export const cart = pgTable("cart", {
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	user: uuid("user").references(() => profiles.id, { onDelete: "cascade", onUpdate: "cascade" } ),
-	product: uuid("product").references(() => products.id, { onDelete: "cascade", onUpdate: "cascade" } ),
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	user: uuid("user").references(() => profiles.id),
+	product: uuid("product").references(() => products.id),
 	quantity: bigint("quantity", { mode: "number" }).notNull(),
-	id: uuid("id").notNull(),
 });
 
 export const productBatches = pgTable("product_batches", {

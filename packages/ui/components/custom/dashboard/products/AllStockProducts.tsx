@@ -17,12 +17,11 @@ import { Button } from "../../../ui/button";
 import { useRouter } from "next/navigation";
 
 const AllStockProducts = () => {
-  const [selectedProduct, setSelectedProduct] = React.useState<products | undefined>();
   const router = useRouter();
   const { data, isLoading } = useQuery({
     queryKey: ["stocks"],
     queryFn: async () => {
-      const response = await axios.get("/api/products/stocks");
+      const response = await axios.get("/api/products/stocks"); 
       return response.data.stocks;
     },
   });
@@ -35,19 +34,19 @@ const AllStockProducts = () => {
     },
   });
 
-  React.useEffect(() => {
-    if (data && data.length > 0 && Products) {
-      const firstProductId = data[0].productId;
-      const product = Products.find((product: products) => product.id === firstProductId);
-      setSelectedProduct(product);
-    }
-  }, [data, Products]);
 
-  if (isLoading || !data || !Products) {
+  if (isLoading || !data || !Products || ProductsLoading) {
     return (
       <div className="flex flex-row gap-7 flex-wrap xl:justify-start justify-center items-center">
-        Loading...
-      </div>
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        </div>
     );
   }
 

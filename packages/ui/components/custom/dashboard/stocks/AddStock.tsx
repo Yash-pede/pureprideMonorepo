@@ -91,7 +91,7 @@ const AddStock = ({
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 py-4"
           >
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-4 items-center gap-4 pointer-events-none">
               <Label htmlFor="productName" className="text-right">
                 Name
               </Label>

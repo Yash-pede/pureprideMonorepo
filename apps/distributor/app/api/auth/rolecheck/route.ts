@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
   } else {
     return NextResponse.json({
       success: true,
-      message: "Welcome, you are logged in as admin",
+      message: "Welcome, you are logged in as distributor",
     });
   }
 };
