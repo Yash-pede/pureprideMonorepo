@@ -8,7 +8,7 @@ export const GET = async () => {
   try {
     const allProducts = await db.select().from(productBatches);
     return NextResponse.json({ success: true, allProducts });
-  } catch (err) {
+  } catch (err:any) {
     // console.log(err);
     return NextResponse.json({
       success: false,
@@ -28,7 +28,7 @@ export const POST = async (req: NextRequest) => {
       quantity: quantity,
     });
     return NextResponse.json({ success: true, product: product });
-  } catch (err) {
+  } catch (err:any) {
     // console.log(err);
     return NextResponse.json({
       success: false,
@@ -49,7 +49,7 @@ export const DELETE = async (req: NextRequest) => {
       message: "Stock deleted",
       delProduct,
     });
-  } catch (err) {
+  } catch (err:any) {
     console.log(err);
     return NextResponse.json({
       success: false,

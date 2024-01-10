@@ -42,7 +42,7 @@ function getProductName(id: string) {
     } else {
       throw new Error(data.message);
     }
-  } catch (err) {
+  } catch (err:any) {
     console.error(err);
     return null;
   }

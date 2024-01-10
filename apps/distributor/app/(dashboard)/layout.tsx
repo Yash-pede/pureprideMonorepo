@@ -19,7 +19,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     if (!(role && role[0]?.userrole === userRoles.enumValues[2])) {
       throw new Error("Unauthorized");
     }
-  } catch (err) {
+  } catch (err:any) {
     redirect("/auth");
   }
   return (
