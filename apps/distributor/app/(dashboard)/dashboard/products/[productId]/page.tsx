@@ -23,7 +23,9 @@ const ProductPage = () => {
   const productId = usePathname()?.split("/").pop();
   const supabase = createClientComponentClient();
   const [useId, setUserId] = useState("");
-  const user = supabase.auth.getUser().then((res) => setUserId(res.data.user?.id || ""));
+  const user = supabase.auth
+    .getUser()
+    .then((res) => setUserId(res.data.user?.id || ""));
   const [addProductSheet, setAddProductSheet] = useState(false);
   const {
     data: product,

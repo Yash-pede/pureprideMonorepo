@@ -42,7 +42,7 @@ function getProductName(id: string) {
     } else {
       throw new Error(data.message);
     }
-  } catch (err:any) {
+  } catch (err: any) {
     console.error(err);
     return null;
   }
@@ -121,7 +121,7 @@ export const columns: ColumnDef<typeof productBatches._.inferSelect>[] = [
       return (
         <div
           className={`lowercase truncate flex items-center gap-1 w-full justify-between ${
-            isDeleted ? "line-through" : "" 
+            isDeleted ? "line-through" : ""
           }`}
         >
           <div className="max-w-32 truncate">{productName}</div>

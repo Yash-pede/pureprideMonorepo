@@ -11,19 +11,23 @@ export const GET = async () => {
 
 export const DELETE = async (req: NextRequest) => {
   console.log("DELETE");
-  try{
+  try {
     const { id, actionType } = await req.json();
     if (actionType === "ban") {
-      await db.update(profiles).set({ userrole: userRoles.enumValues[3]}).where(eq(profiles.id, id));
+      await db
+        .update(profiles)
+        .set({ userrole: userRoles.enumValues[3] })
+        .where(eq(profiles.id, id));
       return NextResponse.json({ success: true, message: "User banned" });
-    }
-    else if(actionType === "delete") {
+    } else if (actionType === "delete") {
       await db.delete(profiles).where(eq(profiles.id, id));
       return NextResponse.json({ success: true, message: "User deleted" });
     }
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
-    return NextResponse.json({ success: false, message: "Something went wrong" });
+    return NextResponse.json({
+      success: false,
+      message: "Something went wrong",
+    });
   }
 };

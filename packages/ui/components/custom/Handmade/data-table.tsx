@@ -57,19 +57,19 @@ function DataTable<TData, TValue>({
       .on(
         "postgres_changes",
         {
-          event: "*",
+          event: "workspace:*",
           schema: "public",
           table: tableName,
         },
         () => {
           router.refresh();
-        }
+        },
       )
       .subscribe();
     return () => {
       supabaseUsers.removeChannel(channel);
     };
-  }, [router.refresh, supabaseUsers,table.getRowModel().rows.length]);
+  }, [router.refresh, supabaseUsers, table.getRowModel().rows.length]);
   return (
     <section className="w-full h-full relative">
       <DropdownMenu>
@@ -111,7 +111,7 @@ function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -130,7 +130,7 @@ function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

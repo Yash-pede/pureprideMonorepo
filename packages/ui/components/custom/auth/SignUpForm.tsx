@@ -81,7 +81,7 @@ export default function SignInForm() {
           },
         },
       });
-    } catch (err:any) {
+    } catch (err: any) {
       console.log(err);
       toast.error("Error signing up");
     }
@@ -101,7 +101,7 @@ export default function SignInForm() {
         } else {
           setIsUserNameAvailable(true);
         }
-      } catch (err:any) {
+      } catch (err: any) {
         toast.error("Error checking username");
       } finally {
         setIsCheckingUser(false);

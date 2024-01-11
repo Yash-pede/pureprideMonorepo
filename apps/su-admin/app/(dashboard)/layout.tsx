@@ -19,17 +19,17 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     if (!(role && role[0]?.userrole === userRoles.enumValues[0])) {
       throw new Error("Unauthorized");
     }
-  } catch (err:any) {
+  } catch (err: any) {
     redirect("/auth");
   }
   return (
     <div className="flex h-screen">
       <div className="hidden md:block">
-        <Sidebar appName="Superadmin"/>
+        <Sidebar appName="Superadmin" />
       </div>
 
       <div className="flex-1 flex flex-col overflow-auto dark:border-neutral-700/70 border-l-[1px] w-full relative">
-        <Navbar appName="Superadmin"/>
+        <Navbar appName="Superadmin" />
         <main className="md:p-3 mt-3">{children}</main>
       </div>
     </div>

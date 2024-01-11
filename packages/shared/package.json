@@ -5,6 +5,7 @@
   "exports": {
     "./images": "./images/image.ts",
     "./types": "./types.ts",
-    "./dummyContent": "./dummyContent.ts"
+    "./dummyContent": "./dummyContent.ts",
+    "./contents":"./contents.ts"
   }
 }

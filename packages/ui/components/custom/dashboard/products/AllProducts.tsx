@@ -17,9 +17,14 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import Notfound from "../../Handmade/Notfound/Notfound";
 
-const AllProducts = ({data,isLoading}:{data:products[],isLoading:boolean}) => {
+const AllProducts = ({
+  data,
+  isLoading,
+}: {
+  data: products[];
+  isLoading: boolean;
+}) => {
   const router = useRouter();
-
 
   return (
     <div className="w-full">
@@ -83,8 +88,10 @@ const AllProducts = ({data,isLoading}:{data:products[],isLoading:boolean}) => {
             ))
           ) : (
             <div className="flex flex-col justify-center items-center">
-              <p className="text-2xl font-bold text-center w-full mx-auto">No products</p>
-            <Notfound />
+              <p className="text-2xl font-bold text-center w-full mx-auto">
+                No products
+              </p>
+              <Notfound />
             </div>
           )}
         </section>

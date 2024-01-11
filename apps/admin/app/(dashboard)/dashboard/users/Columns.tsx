@@ -14,7 +14,7 @@ import {
   TypeIcon,
 } from "lucide-react";
 import { toast } from "sonner";
-import {ComboboxDemo} from "@repo/ui/components";
+import { ComboboxDemo } from "@repo/ui/components";
 import { format } from "date-fns/format";
 
 const onBan = async (id: string) => {
@@ -181,6 +181,7 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
     },
   },
   {
-    accessorKey: "id", enableHiding: true,
+    accessorKey: "id",
+    enableHiding: true,
   },
 ];

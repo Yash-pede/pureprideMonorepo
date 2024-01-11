@@ -9,8 +9,11 @@ export default function RolecheckSuAdmin(Component: React.ComponentType<any>) {
     try {
       const supabase = createClientComponentClient();
       const router = useRouter();
-      
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
 
       if (userError || !user) {
         // Handle user authentication error or user not found
@@ -26,7 +29,9 @@ export default function RolecheckSuAdmin(Component: React.ComponentType<any>) {
 
       if (roleError || !role || role.length === 0) {
         // Handle role fetch error or no roles found
-        return <div className="">You are not authorized to view this page.</div>;
+        return (
+          <div className="">You are not authorized to view this page.</div>
+        );
       }
 
       const userRole = role[0]?.userrole; // Access userrole property with nullish coalescing
@@ -36,7 +41,9 @@ export default function RolecheckSuAdmin(Component: React.ComponentType<any>) {
         console.log(userRoles.enumValues[0]);
         return <Component {...props} />;
       } else {
-        return <div className="">You are not authorized to view this page.</div>;
+        return (
+          <div className="">You are not authorized to view this page.</div>
+        );
       }
     } catch (error) {
       // Handle any unexpected errors

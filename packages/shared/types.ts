@@ -20,7 +20,7 @@ export const addingStockFormSchema = z.object({
   expiryDate: z.date().describe("Expiry Date"),
   quantity: z.string().describe("Quantity").min(1, "Quantity too short"),
 });
-export const addingCartFormSchema = z.object({  
+export const addingCartFormSchema = z.object({
   quantity: z.string().describe("Quantity").min(1, "Quantity too short"),
 });
 

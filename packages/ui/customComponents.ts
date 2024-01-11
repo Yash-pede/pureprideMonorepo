@@ -43,5 +43,5 @@ export {
   RolecheckSuAdmin,
   Notfound,
   CommingSoon,
-  AddStockDistributor
+  AddStockDistributor,
 };

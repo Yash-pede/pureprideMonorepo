@@ -9,18 +9,18 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@repo/drizzle": "*",
-    "@repo/shared": "*",
-    "@repo/ui": "*",
+    "@repo/drizzle": "workspace:*",
+    "@repo/shared": "workspace:*",
+    "@repo/ui": "workspace:*",
     "next": "^14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.2",
-    "@repo/eslint-config": "*",
-    "@repo/tailwind-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/eslint": "^8.44.7",
     "@types/lodash": "^4.14.202",
     "@types/node": "^17.0.12",

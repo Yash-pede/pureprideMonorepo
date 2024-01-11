@@ -23,7 +23,7 @@ const Profile = () => {
     };
     getUser();
   });
-  
+
   return (
     <div>
       {user?.last_sign_in_at || null}

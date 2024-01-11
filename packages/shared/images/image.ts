@@ -46,14 +46,15 @@ import sidebar from "./refImages/sidebar.png";
 import sliderToggel from "./refImages/sliderToggel.png";
 
 import productadd from "./refImages/productadd.png";
+import profileImage from "./refImages/profile.jpeg";
 
 import userSales from "./refImages/user-sales.svg";
 import userDistributor from "./refImages/user-dist.svg";
 import userAdmin from "./refImages/user-admin.svg";
-import mediTemp from"./refImages/mediTemp.jpg";
+import mediTemp from "./refImages/mediTemp.jpg";
 
-import left from "./ui/left.png"
-import right from "./ui/right.png"
+import left from "./ui/left.png";
+import right from "./ui/right.png";
 
 export {
   mediTemp,
@@ -104,5 +105,6 @@ export {
   userSales,
   userDistributor,
   left,
-  right
+  right,
+  profileImage,
 };

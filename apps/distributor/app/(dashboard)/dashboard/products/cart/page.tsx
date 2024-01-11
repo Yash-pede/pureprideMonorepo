@@ -11,7 +11,7 @@ const Cart = () => {
       return response.data.cartItems || response.data.message;
     },
   });
-    console.log(cart)
+  console.log(cart);
   return <div>Cart</div>;
 };
 

@@ -31,7 +31,7 @@ export default function Users() {
         </Button>
       )}
       {status == "success" ? (
-          <DataTable columns={columns} data={data} tableName="profiles" />
+        <DataTable columns={columns} data={data} tableName="profiles" />
       ) : (
         <div className="space-y-3">
           <Skeleton className="h-12 w-full" />

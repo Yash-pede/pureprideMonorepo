@@ -23,7 +23,7 @@ const NavbarSite = () => {
       if (error) {
         console.error("Error fetching user session:", error);
         return;
-      } 
+      }
 
       setUser(userSession?.session?.user || null);
     };

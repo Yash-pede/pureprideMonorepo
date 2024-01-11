@@ -8,7 +8,7 @@ export const GET = async () => {
   try {
     const allProducts = await db.select().from(productBatches);
     return NextResponse.json({ success: true, allProducts });
-  } catch (err:any) {
+  } catch (err: any) {
     // console.log(err);
     return NextResponse.json({
       success: false,
@@ -20,15 +20,15 @@ export const POST = async (req: NextRequest) => {
   console.log("POST");
   try {
     const { id, batchNo, quantity, expiryDate } = await req.json();
-    console.log(id);  
+    console.log(id);
     const product = await db.insert(productBatches).values({
-     productId: id,
+      productId: id,
       batchNo: batchNo,
       expiryDate: expiryDate,
       quantity: quantity,
     });
     return NextResponse.json({ success: true, product: product });
-  } catch (err:any) {
+  } catch (err: any) {
     // console.log(err);
     return NextResponse.json({
       success: false,
@@ -49,7 +49,7 @@ export const DELETE = async (req: NextRequest) => {
       message: "Stock deleted",
       delProduct,
     });
-  } catch (err:any) {
+  } catch (err: any) {
     console.log(err);
     return NextResponse.json({
       success: false,
@@ -57,4 +57,3 @@ export const DELETE = async (req: NextRequest) => {
     });
   }
 };
-

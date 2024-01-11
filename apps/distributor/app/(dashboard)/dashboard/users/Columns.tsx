@@ -15,7 +15,7 @@ import {
   TypeIcon,
 } from "lucide-react";
 import { toast } from "sonner";
-import {ComboboxDemo} from "@repo/ui/components";
+import { ComboboxDemo } from "@repo/ui/components";
 import { format } from "date-fns";
 
 const onBan = async (id: string) => {
@@ -173,7 +173,7 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
       if (row.getValue("updatedAt")) {
         return (
           <p className="text-xs text-center text-muted-foreground">
-            {format(row.getValue("updatedAt"),"dd MMM yyyy hh:mm a")} 
+            {format(row.getValue("updatedAt"), "dd MMM yyyy hh:mm a")}
           </p>
         );
       } else {

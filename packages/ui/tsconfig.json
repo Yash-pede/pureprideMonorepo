@@ -7,6 +7,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src"],
+  "include": ["components"],
   "exclude": ["node_modules", "dist"]
 }

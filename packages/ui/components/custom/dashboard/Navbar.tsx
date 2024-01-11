@@ -67,7 +67,7 @@ const Navbar = ({ appName }: { appName: string }) => {
     <>
       <nav
         className={cn(
-          "sticky top-0 inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 z-40 flex px-2 w-full items-center justify-between py-2 md:py-4"
+          "sticky top-0 inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 z-40 flex px-2 w-full items-center justify-between py-2 md:py-4",
         )}
       >
         <Link href={"/"} className={cn("justify-left")}>
@@ -77,7 +77,9 @@ const Navbar = ({ appName }: { appName: string }) => {
         <NavigationMenu className="hidden md:block bg-transparent">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">Getting started</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="bg-transparent">
+                Getting started
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
@@ -108,7 +110,9 @@ const Navbar = ({ appName }: { appName: string }) => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">Pages</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="bg-transparent">
+                Pages
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {components.map((component) => (
@@ -124,7 +128,12 @@ const Navbar = ({ appName }: { appName: string }) => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/help" legacyBehavior passHref className="bg-transparent">
+              <Link
+                href="/help"
+                legacyBehavior
+                passHref
+                className="bg-transparent"
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Need Help
                 </NavigationMenuLink>
@@ -226,7 +235,7 @@ const Navbar = ({ appName }: { appName: string }) => {
           </Sheet>
         </div>
       </nav>
-      <Separator/>
+      <Separator />
     </>
   );
 };
@@ -251,7 +260,7 @@ const ListItem = React.forwardRef<React.ElementRef<typeof Link>, ListItemProps>(
             passHref
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-              className
+              className,
             )}
             {...props}
           >
@@ -263,7 +272,7 @@ const ListItem = React.forwardRef<React.ElementRef<typeof Link>, ListItemProps>(
         </NavigationMenuLink>
       </li>
     );
-  }
+  },
 );
 
 ListItem.displayName = "ListItem";

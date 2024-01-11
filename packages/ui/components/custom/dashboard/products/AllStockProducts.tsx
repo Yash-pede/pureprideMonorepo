@@ -21,7 +21,7 @@ const AllStockProducts = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["stocks"],
     queryFn: async () => {
-      const response = await axios.get("/api/products/stocks"); 
+      const response = await axios.get("/api/products/stocks");
       return response.data.stocks;
     },
   });
@@ -34,19 +34,18 @@ const AllStockProducts = () => {
     },
   });
 
-
   if (isLoading || !data || !Products || ProductsLoading) {
     return (
       <div className="flex flex-row gap-7 flex-wrap xl:justify-start justify-center items-center">
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-          <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
-        </div>
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+        <Skeleton className="XL:w-[300px] md:w-[250px] h-[350px]" />
+      </div>
     );
   }
 
@@ -54,7 +53,9 @@ const AllStockProducts = () => {
     <div className="w-full">
       <section className="flex flex-row gap-7 flex-wrap xl:justify-start justify-center items-center">
         {data.map((productData: stockProducts) => {
-          const product = Products.find((p: products) => p.id === productData.productId);
+          const product = Products.find(
+            (p: products) => p.id === productData.productId,
+          );
 
           return (
             <Card
@@ -83,12 +84,16 @@ const AllStockProducts = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-lg ">&#8377;{product?.price || "N/A"}</p>
-                <p className="text-sm">Quantity: {productData.quantity || "N/A"}</p>
+                <p className="text-sm">
+                  Quantity: {productData.quantity || "N/A"}
+                </p>
               </CardContent>
               <CardFooter className="flex flex-col gap-1">
                 <Button
                   className="w-full"
-                  onClick={() => router.push(`/dashboard/products/${productData.productId}`)}
+                  onClick={() =>
+                    router.push(`/dashboard/products/${productData.productId}`)
+                  }
                 >
                   View
                 </Button>

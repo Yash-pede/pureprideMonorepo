@@ -1,1 +1,1 @@
-export * from "./migrations/schema"
+export * from "./migrations/schema";

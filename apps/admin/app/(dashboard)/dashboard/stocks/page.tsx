@@ -30,7 +30,11 @@ const Stocks = () => {
         <div>Loading</div>
       ) : (
         <main className="mx-auto">
-          <DataTable columns={columns} data={productsdata} tableName="product_batches" />
+          <DataTable
+            columns={columns}
+            data={productsdata}
+            tableName="product_batches"
+          />
         </main>
       )}
     </section>

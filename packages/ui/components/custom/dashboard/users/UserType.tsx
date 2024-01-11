@@ -12,11 +12,7 @@ import {
   CommandInput,
   CommandItem,
 } from "../../../ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../../ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../../../ui/popover";
 import { userRoles } from "@repo/drizzle/schema";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
@@ -35,7 +31,7 @@ export default function ComboboxDemo({
   const isInitialRender = React.useRef(true);
   React.useEffect(() => {
     const updateUserRole = async (
-      selectedValue: (typeof userRoles.enumValues)[number]
+      selectedValue: (typeof userRoles.enumValues)[number],
     ) => {
       try {
         const selectedIndex = userRoles.enumValues.indexOf(selectedValue);
@@ -50,7 +46,7 @@ export default function ComboboxDemo({
             throw error;
           }
           toast.success(
-            `User role updated successfully as: ${data[0].userrole}`
+            `User role updated successfully as: ${data[0].userrole}`,
           );
         } else {
           toast.error("Selected enum value not found in the enumValues array.");
@@ -92,7 +88,7 @@ export default function ComboboxDemo({
                 value={enum_Value}
                 onSelect={(currentValue) => {
                   setValue(
-                    currentValue.toUpperCase() as (typeof userRoles.enumValues)[number]
+                    currentValue.toUpperCase() as (typeof userRoles.enumValues)[number],
                   );
                   // console.log(value,currentValue);
                   setOpen(false);
@@ -101,7 +97,7 @@ export default function ComboboxDemo({
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === enum_Value ? "opacity-100" : "opacity-0"
+                    value === enum_Value ? "opacity-100" : "opacity-0",
                   )}
                 />
                 {enum_Value}

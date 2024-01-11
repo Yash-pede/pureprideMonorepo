@@ -48,7 +48,7 @@ const ProductNav = () => {
       if (acceptedFiles.length > 0) {
         setFiles(() => [
           ...acceptedFiles.map((file: File) =>
-            Object.assign(file, { preview: URL.createObjectURL(file) })
+            Object.assign(file, { preview: URL.createObjectURL(file) }),
           ),
         ]);
       }
@@ -56,7 +56,7 @@ const ProductNav = () => {
         setRejected((previousFiles) => [...previousFiles, ...rejectedfiles]);
       }
     },
-    [rejected.length]
+    [rejected.length],
   );
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
@@ -104,7 +104,7 @@ const ProductNav = () => {
             .from("Products")
             .upload(
               `images/ProductImage-${Date.now().toString()}-${files[0]?.name}`,
-              files[0]
+              files[0],
             );
         if (ImageError) {
           throw ImageError;
@@ -146,7 +146,7 @@ const ProductNav = () => {
       <h1 className="text-3xl font-bold mb-5 text-left ">Products</h1>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger>
-          <BtnBlur className="gap-2 flex items-center " >
+          <BtnBlur className="gap-2 flex items-center ">
             <PlusCircle />
             Add Product
           </BtnBlur>
@@ -155,171 +155,171 @@ const ProductNav = () => {
           <SheetHeader>
             <SheetTitle>Creating new Products</SheetTitle>
             {/* <SheetDescription> */}
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        {/* <FormLabel>Name</FormLabel> */}
-                        <FormControl>
-                          <Input
-                            placeholder="Product Name"
-                            {...field}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        {/* <FormLabel>Description</FormLabel> */}
-                        <FormControl>
-                          <Input
-                            placeholder="Product Description"
-                            {...field}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="price"
-                    render={({ field }) => (
-                      <FormItem>
-                        {/* <FormLabel>Price</FormLabel> */}
-                        <FormControl>
-                          <Input
-                            placeholder="Product Price"
-                            {...field}
-                            onChange={field.onChange}
-                            type="number"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="image"
-                    render={({ field }) => (
-                      <FormItem className="">
-                        <div {...getRootProps()}>
-                          <input
-                            {...getInputProps({ onChange: field.onChange })}
-                            {...field}
-                          />
-                          <div className="hidden xl:block">
-                            {!!files.length && (
-                              <>
-                                <div
-                                  className="w-full bg-secondary rounded-2xl relative h-[150px] flex justify-center items-center cursor-pointer"
-                                  onClick={open}
-                                >
-                                  <div className="flex gap-4 justify-center items-center">
-                                    {isDragActive ? (
-                                      <>
-                                        <PlusSquare />
-                                        <p>Drop Your Files here</p>
-                                      </>
-                                    ) : (
-                                      <>
-                                        <Plus />
-                                        <p>Upload Files</p>
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="absolute bottom-3 w-full text-center text-sm">
-                                    <span>Upload Single image at a time </span>
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                          <div className="xl:hidden">
-                            <Button
-                              type="button"
-                              className="w-full"
-                              variant={"btn-primary"}
-                              onClick={open}
-                            >
-                              Open Explorer
-                            </Button>
-                          </div>
-                        </div>
-                        {!!files.length && (
-                          <section className="mt-10">
-                            <p>{form.formState.errors.image?.message}</p>
-                            <p>Added files</p>
-                            <ul className="flex flex-col space-y-7 w-full mt-2 text-sm  text-accent-foreground overflow-y-auto h-80 overflow-auto ">
-                              {files.map((file) => (
-                                <li
-                                  key={file.name}
-                                  className="flex flex-col relative justify-between items-center p-2 bg-secondary-foreground rounded-md"
-                                >
-                                  <Image
-                                    src={URL.createObjectURL(file)}
-                                    alt="product image"
-                                    width={100}
-                                    height={100}
-                                    className="w-full h-full"
-                                  />
-                                  <p className="text-xs font-light text-muted-foreground justify-start text-left truncate ">
-                                    {file.name}
-                                  </p>
-                                  <button
-                                    onClick={() => removeFile(file.name)}
-                                    className="absolute -top-0 right-0 text-red-500"
-                                  >
-                                    <XCircle />
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                            {!!files.length && (
-                              <Button
-                                variant={"destructive"}
-                                onClick={() => removeAll()}
-                                className="w-full "
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      {/* <FormLabel>Name</FormLabel> */}
+                      <FormControl>
+                        <Input
+                          placeholder="Product Name"
+                          {...field}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      {/* <FormLabel>Description</FormLabel> */}
+                      <FormControl>
+                        <Input
+                          placeholder="Product Description"
+                          {...field}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      {/* <FormLabel>Price</FormLabel> */}
+                      <FormControl>
+                        <Input
+                          placeholder="Product Price"
+                          {...field}
+                          onChange={field.onChange}
+                          type="number"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="image"
+                  render={({ field }) => (
+                    <FormItem className="">
+                      <div {...getRootProps()}>
+                        <input
+                          {...getInputProps({ onChange: field.onChange })}
+                          {...field}
+                        />
+                        <div className="hidden xl:block">
+                          {!!files.length && (
+                            <>
+                              <div
+                                className="w-full bg-secondary rounded-2xl relative h-[150px] flex justify-center items-center cursor-pointer"
+                                onClick={open}
                               >
-                                Remove
-                              </Button>
-                            )}
-                          </section>
-                        )}
-                      </FormItem>
-                    )}
-                  />
+                                <div className="flex gap-4 justify-center items-center">
+                                  {isDragActive ? (
+                                    <>
+                                      <PlusSquare />
+                                      <p>Drop Your Files here</p>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Plus />
+                                      <p>Upload Files</p>
+                                    </>
+                                  )}
+                                </div>
+                                <div className="absolute bottom-3 w-full text-center text-sm">
+                                  <span>Upload Single image at a time </span>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                        <div className="xl:hidden">
+                          <Button
+                            type="button"
+                            className="w-full"
+                            variant={"btn-primary"}
+                            onClick={open}
+                          >
+                            Open Explorer
+                          </Button>
+                        </div>
+                      </div>
+                      {!!files.length && (
+                        <section className="mt-10">
+                          <p>{form.formState.errors.image?.message}</p>
+                          <p>Added files</p>
+                          <ul className="flex flex-col space-y-7 w-full mt-2 text-sm  text-accent-foreground overflow-y-auto h-80 overflow-auto ">
+                            {files.map((file) => (
+                              <li
+                                key={file.name}
+                                className="flex flex-col relative justify-between items-center p-2 bg-secondary-foreground rounded-md"
+                              >
+                                <Image
+                                  src={URL.createObjectURL(file)}
+                                  alt="product image"
+                                  width={100}
+                                  height={100}
+                                  className="w-full h-full"
+                                />
+                                <p className="text-xs font-light text-muted-foreground justify-start text-left truncate ">
+                                  {file.name}
+                                </p>
+                                <button
+                                  onClick={() => removeFile(file.name)}
+                                  className="absolute -top-0 right-0 text-red-500"
+                                >
+                                  <XCircle />
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                          {!!files.length && (
+                            <Button
+                              variant={"destructive"}
+                              onClick={() => removeAll()}
+                              className="w-full "
+                            >
+                              Remove
+                            </Button>
+                          )}
+                        </section>
+                      )}
+                    </FormItem>
+                  )}
+                />
 
-                  <Button
-                    variant={"btn-secondary"}
-                    type="submit"
-                    className="w-full flex gap-2"
-                  >
-                    {form.formState.isSubmitting ? (
-                      <LoaderIcon className="animate-spin" />
-                    ) : (
-                      <>
-                        <PlusCircle />
-                        Add Product
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </Form>
+                <Button
+                  variant={"btn-secondary"}
+                  type="submit"
+                  className="w-full flex gap-2"
+                >
+                  {form.formState.isSubmitting ? (
+                    <LoaderIcon className="animate-spin" />
+                  ) : (
+                    <>
+                      <PlusCircle />
+                      Add Product
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Form>
             {/* </SheetDescription> */}
           </SheetHeader>
         </SheetContent>

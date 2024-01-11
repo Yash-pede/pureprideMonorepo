@@ -21,8 +21,8 @@ export const DELETE = async (req: NextRequest) => {
   try {
     const { id } = await req.json();
     const product = await db.delete(products).where(eq(products.id, id));
-    return NextResponse.json({ success: true, message: "Product deleted"});
-  } catch (err:any) {
+    return NextResponse.json({ success: true, message: "Product deleted" });
+  } catch (err: any) {
     console.log(err);
     if (err.code == 23503) {
       return NextResponse.json({

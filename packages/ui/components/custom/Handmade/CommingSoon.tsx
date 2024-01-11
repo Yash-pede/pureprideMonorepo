@@ -1,6 +1,6 @@
 import React from "react";
 import { Skeleton } from "../../ui/skeleton";
-import { Badge } from "../../ui/badge"
+import { Badge } from "../../ui/badge";
 
 const CommingSoon = () => {
   return (
