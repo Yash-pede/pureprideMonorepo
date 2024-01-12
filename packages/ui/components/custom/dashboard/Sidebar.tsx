@@ -12,6 +12,7 @@ import {
   ChevronLast,
   ChevronLeftCircleIcon,
   ChevronRightCircleIcon,
+  ChevronUp,
   MoreHorizontal,
 } from "lucide-react";
 import Image from "next/image";
@@ -36,15 +37,15 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps) => {
 
   return (
     <aside className={cn("h-screen ")}>
-      <nav className="h-full flex flex-col md:border-r shadow-sm">
+      <nav className="h-full flex flex-col shadow-sm">
         <div className="p-4 pb-2 flex items-center justify-between">
-          <h2
-            className={`text-xl font-bold overflow-hidden transition-all ${
+          <Link href={"/dashboard"}
+            className={`text-xl font-semibold overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
           >
-            {appName}
-          </h2>
+            {appName?.toUpperCase()}
+          </Link>
           <Button
             className="hidden md:block"
             variant={"ghost"}
@@ -69,7 +70,8 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps) => {
             />
           ))}
         </ul>
-        <div className="border-t flex p-3">
+        <Separator />
+        <div className="flex p-3 mx-auto">
           <Image
             src={profileImage}
             alt=""
@@ -86,7 +88,7 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps) => {
               <h4 className="font-semibold">jhon Wick</h4>
               <span>@jwick</span>
             </div>
-            <MoreHorizontal />
+            <ChevronUp className="cursor-pointer " />
           </div>
         </div>
       </nav>
@@ -138,7 +140,7 @@ function SidebarItem({
         <div
           className={`
         absolute left-full rounded-md px-2 py-1 ml-6
-        bg-accent text-sm invisible opacity-20 -translate-x-3 transition-all 
+        bg-accent text-md invisible opacity-20 -translate-x-3 transition-all 
         group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 !z-50
       `}
         >

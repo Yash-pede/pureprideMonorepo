@@ -23,8 +23,6 @@ const buttonVariants = cva(
           "whitespace-nowrap text-primary-foreground hover:scale-105 dark:bg-gradient-to-t dark:from-[#24232C] dark:to-[#100F18] dark:text-primary-foreground border dark:border-input dark:bg-accent bg-primary text-lg font-normal shadow-xl shadow-purple-500/20 dark:shadow-purple-400/10 dark:shadow-lg",
         "btn-secondary":
           "whitespace-nowrap dark:text-primary-foreground bg-muted text-lg font-normal",
-        "btn-sidebar":
-          "whitespace-nowrap hover:scale-105 duration-100 transition-all dark:text-primary-foreground text-lg font-normal hover:bg-white border-[0.2px] hover:border-black/10 border-input  hover:text-accent-foreground dark:hover:bg-accent dark:hover:border-muted-foreground dark:hover:bg-gradient-to-t dark:hover:from-[#24232C] dark:hover:to-[#100F18] hover:shadow-xl hover:shadow-purple-500/10 rounded-md",
       },
       size: {
         default: "h-10 px-4 py-2",
