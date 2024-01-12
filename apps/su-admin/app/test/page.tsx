@@ -13,7 +13,7 @@ const TestPage = () => {
           fill="none"
           stroke="#000"
           strokeWidth="20"
-          stroke-dasharray="0 660"
+          strokeDasharray="0 660"
           stroke-dashoffset="-330"
           stroke-linecap="round"
         ></circle>
@@ -25,7 +25,7 @@ const TestPage = () => {
           fill="none"
           stroke="#000"
           strokeWidth="20"
-          stroke-dasharray="0 220"
+          strokeDasharray="0 220"
           stroke-dashoffset="-110"
           stroke-linecap="round"
         ></circle>
@@ -37,7 +37,7 @@ const TestPage = () => {
           fill="none"
           stroke="#000"
           strokeWidth="20"
-          stroke-dasharray="0 440"
+          strokeDasharray="0 440"
           stroke-linecap="round"
         ></circle>
         <circle
@@ -48,7 +48,7 @@ const TestPage = () => {
           fill="none"
           stroke="#000"
           strokeWidth="20"
-          stroke-dasharray="0 440"
+          strokeDasharray="0 440"
           stroke-linecap="round"
         ></circle>
       </svg>
