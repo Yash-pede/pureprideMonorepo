@@ -6,11 +6,11 @@ Project Description
 
 ### Todo
 
-- [ ] Add product page in distributor
+- [ ] remove username across the page  
 
 ### In Progress
 
+
 ### Done ✓
 
-- [x] remove del btn from admin
-- [x] auto close sheet on successfull product addition in suadmin
+
