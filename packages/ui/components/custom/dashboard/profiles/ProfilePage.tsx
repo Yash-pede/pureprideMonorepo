@@ -35,10 +35,7 @@ const ProfilePage = ({ user }: { user: any }) => {
           </div>
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="phone">phone</Label>
-            <Input
-              placeholder="phone"
-              value={userDetails?.phone || "-"}
-            />
+            <Input placeholder="phone" value={userDetails?.phone || "-"} />
           </div>
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="email_verified">email verified</Label>

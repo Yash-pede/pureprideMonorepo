@@ -6,11 +6,8 @@ Project Description
 
 ### Todo
 
-- [ ] remove username across the page  
+- [ ] remove username across the page
 
 ### In Progress
 
-
 ### Done ✓
-
-
