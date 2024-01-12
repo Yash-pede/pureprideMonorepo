@@ -5,7 +5,7 @@ import "./dashboard.scss";
 const Dashboard = () => {
   return (
     <main className="home w-full h-full">
-      {/* <Card1 /> */}
+      <Card1 />
       Main Dashboard page here
     </main>
   );
