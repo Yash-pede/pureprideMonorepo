@@ -3,21 +3,16 @@ import { Button } from "../../ui/button";
 import { menuItems } from "@repo/shared/contents";
 import { cn } from "../../../config/utils";
 import Link from "next/link";
-import { redirect, usePathname, useRouter } from "next/navigation";
-import React, { Children, useContext } from "react";
-import { Badge } from "../../ui/badge";
+import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 import { Separator } from "../../ui/separator";
 import {
   ChevronFirst,
   ChevronLast,
-  ChevronLeftCircleIcon,
-  ChevronRightCircleIcon,
   ChevronUp,
-  MoreHorizontal,
 } from "lucide-react";
 import Image from "next/image";
-import { expand, profileImage } from "@repo/shared/images";
-import { createContext } from "vm";
+import { profileImage } from "@repo/shared/images";
 
 interface SidebarProps {
   toggleNavMenu?: () => void;
@@ -37,8 +32,8 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps) => {
 
   return (
     <aside className={cn("h-screen ")}>
-      <nav className="h-full flex flex-col shadow-sm">
-        <div className="p-4 pb-2 flex items-center justify-between">
+      <nav className="h-full flex flex-col md:shadow-sm">
+        <div className="p-4 pb-2 flex items-center justify-between mt-10">
           <Link href={"/dashboard"}
             className={`text-xl font-semibold overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
