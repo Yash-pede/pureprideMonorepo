@@ -3,7 +3,7 @@ import { Button } from "../../ui/button";
 import { menuItems } from "@repo/shared/contents";
 import { cn } from "../../../config/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Separator } from "../../ui/separator";
 import { ChevronFirst, ChevronLast, ChevronUp } from "lucide-react";
@@ -16,6 +16,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ toggleNavMenu, appName }: SidebarProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   const [expanded, setExpanded] = React.useState(true);
   const highlighted = menuItems.find((item) => {

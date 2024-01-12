@@ -5,6 +5,9 @@ import React from "react";
 
 const ProfilePage = ({ user }: { user: any }) => {
   const userDetails = user.user;
+  const handleOnChange = (e: any) => {
+    console.log(e.target.value);
+  };
   return (
     <div className="container w-full">
       <h2 className="text-4xl font-bold text-left mb-5">Profile</h2>
@@ -13,15 +16,24 @@ const ProfilePage = ({ user }: { user: any }) => {
         <div className="w-full flex flex-wrap justify-between items-center gap-x-16 gap-y-7">
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="email">Email</Label>
-            <Input placeholder="Email" defaultValue={userDetails.email} />
+            <Input
+              onClick={handleOnChange}
+              placeholder="Email"
+              defaultValue={userDetails.email}
+            />
           </div>
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="password">Password</Label>
-            <Input placeholder="password" defaultValue={"********"} />
+            <Input
+              onClick={handleOnChange}
+              placeholder="password"
+              defaultValue={"********"}
+            />
           </div>
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="email_confirmed_at">Email confirmed at</Label>
             <Input
+              onClick={handleOnChange}
               placeholder="email_confirmed_at"
               value={format(userDetails.email_confirmed_at, "dd/MM/yyyy")}
             />
@@ -29,17 +41,23 @@ const ProfilePage = ({ user }: { user: any }) => {
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="last_sign_in_at">Last Sign-in at</Label>
             <Input
+              onClick={handleOnChange}
               placeholder="last_sign_in_at"
               value={format(userDetails.last_sign_in_at, "dd/MM/yyyy")}
             />
           </div>
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="phone">phone</Label>
-            <Input placeholder="phone" value={userDetails?.phone || "-"} />
+            <Input
+              onClick={handleOnChange}
+              placeholder="phone"
+              value={userDetails?.phone || "-"}
+            />
           </div>
           <div className="w-full md:w-1/3 space-y-3">
             <Label htmlFor="email_verified">email verified</Label>
             <Input
+              onClick={handleOnChange}
               placeholder="email_verified"
               value={user.user.identities[0].identity_data.email_verified}
             />
