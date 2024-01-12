@@ -20,7 +20,6 @@ import columns from "./components/custom/dashboard/stocks/columns";
 import RolecheckSuAdmin from "./components/custom/auth/HOC/Rolecheck";
 import Notfound from "./components/custom/Handmade/Notfound/Notfound";
 import CommingSoon from "./components/custom/Handmade/CommingSoon";
-import ProfilePage from "./components/custom/dashboard/profiles/ProfilePage";
 
 export {
   NavbarSite,
@@ -45,5 +44,4 @@ export {
   Notfound,
   CommingSoon,
   AddStockDistributor,
-  ProfilePage,
 };
