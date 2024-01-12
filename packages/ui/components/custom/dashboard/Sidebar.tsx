@@ -32,7 +32,7 @@ const Sidebar = ({ toggleNavMenu, appName }: SidebarProps) => {
   return (
     <aside className={cn("h-screen ")}>
       <nav className="h-full flex flex-col md:shadow-sm">
-        <div className="p-4 pb-2 flex items-center justify-between mt-10 md:mt-2">
+        <div className="p-4 pb-2 flex items-center justify-between mt-10 md:mt-0">
           <Link href={"/dashboard"}
             className={`text-xl font-semibold overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
