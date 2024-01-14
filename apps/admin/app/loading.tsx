@@ -20,8 +20,8 @@ const Loading = () => {
             stroke="#000"
             strokeWidth="20"
             strokeDasharray="0 660"
-            strokeDashoffset="-330"
-            strokeLinecap="round"
+            stroke-dashoffset="-330"
+            stroke-linecap="round"
           ></circle>
           <circle
             className="pl__ring pl__ring--b"
@@ -32,8 +32,8 @@ const Loading = () => {
             stroke="#000"
             strokeWidth="20"
             strokeDasharray="0 220"
-            strokeDashoffset="-110"
-            strokeLinecap="round"
+            stroke-dashoffset="-110"
+            stroke-linecap="round"
           ></circle>
           <circle
             className="pl__ring pl__ring--c"
@@ -44,7 +44,7 @@ const Loading = () => {
             stroke="#000"
             strokeWidth="20"
             strokeDasharray="0 440"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></circle>
           <circle
             className="pl__ring pl__ring--d"
@@ -55,7 +55,7 @@ const Loading = () => {
             stroke="#000"
             strokeWidth="20"
             strokeDasharray="0 440"
-            strokeLinecap="round"
+            stroke-linecap="round"
           ></circle>
         </svg>
         <h1 className="text-3xl font-bold text-center mx-auto ">
