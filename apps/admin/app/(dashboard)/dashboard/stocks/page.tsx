@@ -25,7 +25,6 @@ const Stocks = () => {
   // console.log(data);
   return (
     <section className="w-full flex flex-col">
-      <h2 className="text-3xl font-bold text-left mb-5 ">Stocks</h2>
       {isLoading ? (
         <div>Loading</div>
       ) : (
@@ -33,7 +32,7 @@ const Stocks = () => {
           <DataTable
             columns={columns}
             data={productsdata}
-            tableName="product_batches"
+            tableName="Stocks"
           />
         </main>
       )}

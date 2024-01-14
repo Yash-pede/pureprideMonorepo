@@ -18,7 +18,7 @@ export default function Users() {
 
   return (
     <div className="w-full py-10 space-y-5">
-      <h1 className="text-4xl font-bold text-left">List of all Users</h1>
+      {/* <h1 className="text-4xl font-bold text-left">List of all Users</h1>3xl font-bold text-left mb3xl font-bold text-left mb */}
       {isLoading ? (
         <Button variant={"ghost"} className="gap-4">
           <Dot className="animate-ping text-rose-700 w-10 h-10" />

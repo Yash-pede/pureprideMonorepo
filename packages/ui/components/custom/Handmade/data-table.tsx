@@ -63,42 +63,51 @@ function DataTable<TData, TValue>({
         },
         () => {
           router.refresh();
-        },
+        }
       )
       .subscribe();
+    const idColumn = table.getAllColumns().find((column) => column.id === "id" || column.id === "userId");
+
+    if (idColumn) {
+      idColumn.toggleVisibility(false);
+    }
     return () => {
       supabaseUsers.removeChannel(channel);
     };
-  }, [router.refresh, supabaseUsers, table.getRowModel().rows.length]);
+  }, [router.refresh, supabaseUsers, table]);
   return (
-    <section className="w-full h-full relative">
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          className="ml-auto absolute right-0 -top-16"
-          asChild
-        >
-          <Button variant="outline" className="ml-auto">
-            Columns
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {table
-            .getAllColumns()
-            .filter((column) => column.getCanHide())
-            .map((column) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                >
-                  {column.id}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-        </DropdownMenuContent>
-      </DropdownMenu>
+    <section className="mx-auto h-full">
+      <div className="flex justify-between items-center mb-7">
+        <h1 className="text-2xl font-bold capitalize">
+          {tableName.toString().toUpperCase()}
+        </h1>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="" asChild>
+            <Button variant="outline" className="ml-auto">
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -111,7 +120,7 @@ function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                     </TableHead>
                   );
@@ -130,7 +139,7 @@ function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}

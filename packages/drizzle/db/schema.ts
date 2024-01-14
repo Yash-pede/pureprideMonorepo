@@ -97,8 +97,8 @@ export const products = pgTable(
 );
 
 export const cart = pgTable("cart", {
-  user: uuid("user").references(() => profiles.id),
-  product: uuid("product").references(() => products.id),
+  userId: uuid("userId").references(() => profiles.id),
+  productId: uuid("productId").references(() => products.id),
   quantity: bigint("quantity", { mode: "number" }).notNull(),
 });
 

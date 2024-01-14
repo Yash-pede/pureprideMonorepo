@@ -14,8 +14,8 @@ const TestPage = () => {
           stroke="#000"
           strokeWidth="20"
           strokeDasharray="0 660"
-          stroke-dashoffset="-330"
-          stroke-linecap="round"
+          strokeDashoffset="-330"
+          strokeLinecap="round"
         ></circle>
         <circle
           className="pl__ring pl__ring--b"
@@ -26,8 +26,8 @@ const TestPage = () => {
           stroke="#000"
           strokeWidth="20"
           strokeDasharray="0 220"
-          stroke-dashoffset="-110"
-          stroke-linecap="round"
+          strokeDashoffset="-110"
+          strokeLinecap="round"
         ></circle>
         <circle
           className="pl__ring pl__ring--c"
@@ -38,7 +38,7 @@ const TestPage = () => {
           stroke="#000"
           strokeWidth="20"
           strokeDasharray="0 440"
-          stroke-linecap="round"
+          strokeLinecap="round"
         ></circle>
         <circle
           className="pl__ring pl__ring--d"
@@ -49,7 +49,7 @@ const TestPage = () => {
           stroke="#000"
           strokeWidth="20"
           strokeDasharray="0 440"
-          stroke-linecap="round"
+          strokeLinecap="round"
         ></circle>
       </svg>
       <h1 className="text-3xl font-bold text-center mx-auto ">Checking Auth please wait ..</h1>

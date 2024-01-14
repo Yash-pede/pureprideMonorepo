@@ -9,9 +9,10 @@ export const GET = async () => {
   try {
     const supabase = createServerComponentClient({ cookies: cookies });
     const user = String((await supabase.auth.getUser()).data.user?.id);
-    const cartItems = await db.select().from(cart).where(eq(cart.user, user));
+    const cartItems = await db.select().from(cart).where(eq(cart.userId, user));
     return NextResponse.json({ success: true, cartItems });
   } catch (err: any) {
+    console.log(err);
     return NextResponse.json({
       success: false,
       message: err.message || "Something went wrong",
@@ -23,16 +24,20 @@ export const POST = async (req: Request) => {
   console.log("POST");
   try {
     const { product, quantity, user } = await req.json();
-    console.log(user, quantity);
+    // console.log(user, quantity);
     if (quantity == 0 || quantity < 0) {
       return NextResponse.json({
         success: false,
         message: "Quantity cannot be zero",
       });
     }
-    await db.insert(cart).values({ user, product, quantity }).returning();
+    await db
+      .insert(cart)
+      .values({ userId: user, productId: product, quantity })
+      .returning();
     return NextResponse.json({ success: true });
   } catch (err: any) {
+    console.log(err);
     return NextResponse.json({
       success: false,
       message: err.message || "Something went wrong",
