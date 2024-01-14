@@ -1,63 +1,36 @@
 import React from "react";
 import "./loading.scss";
 
+
 const Loading = () => {
   return (
     <section className="grid w-full h-screen place-items-center relative">
       <div className="space-y-7">
-        <svg
-          className="mx-auto pl"
-          width="240"
-          height="240"
-          viewBox="0 0 240 240"
-        >
-          <circle
-            className="pl__ring pl__ring--a"
-            cx="120"
-            cy="120"
-            r="105"
-            fill="none"
-            stroke="#000"
-            strokeWidth="20"
-            strokeDasharray="0 660"
-            stroke-dashoffset="-330"
-            stroke-linecap="round"
-          ></circle>
-          <circle
-            className="pl__ring pl__ring--b"
-            cx="120"
-            cy="120"
-            r="35"
-            fill="none"
-            stroke="#000"
-            strokeWidth="20"
-            strokeDasharray="0 220"
-            stroke-dashoffset="-110"
-            stroke-linecap="round"
-          ></circle>
-          <circle
-            className="pl__ring pl__ring--c"
-            cx="85"
-            cy="120"
-            r="70"
-            fill="none"
-            stroke="#000"
-            strokeWidth="20"
-            strokeDasharray="0 440"
-            stroke-linecap="round"
-          ></circle>
-          <circle
-            className="pl__ring pl__ring--d"
-            cx="155"
-            cy="120"
-            r="70"
-            fill="none"
-            stroke="#000"
-            strokeWidth="20"
-            strokeDasharray="0 440"
-            stroke-linecap="round"
-          ></circle>
-        </svg>
+        <div className="relative mx-auto">
+          <div className="container">
+            <div className="dot dot-1"></div>
+            <div className="dot dot-2"></div>
+            <div className="dot dot-3"></div>
+          </div>
+
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="goo">
+                <feGaussianBlur
+                  result="blur"
+                  stdDeviation="10"
+                  in="SourceGraphic"
+                ></feGaussianBlur>
+                <feColorMatrix
+                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7"
+                  mode="matrix"
+                  in="blur"
+                ></feColorMatrix>
+              </filter>
+            </defs>
+          </svg>
+        </div>
+
         <h1 className="text-3xl font-bold text-center mx-auto ">
           Checking Auth please wait ..
         </h1>

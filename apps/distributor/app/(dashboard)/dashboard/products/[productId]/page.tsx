@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { products } from "@repo/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, ShoppingCart } from "lucide-react";
 import { format } from "date-fns";
 import {
   Badge,
@@ -17,15 +17,15 @@ import {
 } from "@repo/ui/shadCnComponents";
 import { AddStockDistributor, CommingSoon } from "@repo/ui/components";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
 
 const ProductPage = () => {
   const router = useRouter();
   const productId = usePathname()?.split("/").pop();
   const supabase = createClientComponentClient();
   const [useId, setUserId] = useState("");
-  const user = supabase.auth
-    .getUser()
-    .then((res) => setUserId(res.data.user?.id || ""));
+  const [inCart, setInCart] = useState(false);
+  supabase.auth.getUser().then((res) => setUserId(res.data.user?.id || ""));
   const [addProductSheet, setAddProductSheet] = useState(false);
   const {
     data: product,
@@ -44,7 +44,25 @@ const ProductPage = () => {
       }
     },
   });
-
+  const { data: cart, isLoading: cartLoading } = useQuery({
+    queryKey: ["cart"],
+    queryFn: async () => {
+      const response = await axios.get("/api/products/cart");
+      return response.data.cartItems || response.data.message;
+    },
+  });
+  const isInCart = () => {
+    const isProduct =
+      cart && cart.find((item: any) => item.productId === product?.id);
+    if (isProduct) setInCart(true);
+    else setInCart(false);
+  };
+  useEffect(() => {
+    if (cartLoading) setInCart(true);
+    else {
+      isInCart();
+    }
+  });
   if (isLoading) {
     return <div>Loading</div>;
   }
@@ -100,13 +118,24 @@ const ProductPage = () => {
             ₹ {product.price}
           </span>
           <div className="flex gap-5">
-            <Button
-              className="ml-auto gap-2"
-              variant={"default"}
-              onClick={() => setAddProductSheet((prev) => !prev)}
-            >
-              Add To Cart <PlusCircle />
-            </Button>
+            {inCart ? (
+              <Link href="/dashboard/products/cart">
+                <Button className="ml-auto gap-2" variant={"default"}>
+                  Go to Cart <ShoppingCart />
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                className={`ml-auto gap-2 ${
+                  inCart ? "pointer-events-none" : null
+                }`}
+                variant={"default"}
+                disabled={inCart}
+                onClick={() => setAddProductSheet((prev) => !prev)}
+              >
+                Add To Cart <PlusCircle />
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -122,13 +151,16 @@ const ProductPage = () => {
           className="object-cover w-full h-full rounded-lg"
         />
       </div>
-      <AddStockDistributor
-        user={useId}
-        openSheet={addProductSheet}
-        setOpenSheet={setAddProductSheet}
-        Productname={product.name}
-        id={product?.id}
-      />
+      {!inCart && (
+        <AddStockDistributor
+          user={useId}
+          setInCart={setInCart}
+          openSheet={addProductSheet}
+          setOpenSheet={setAddProductSheet}
+          Productname={product.name}
+          id={product?.id}
+        />
+      )}
     </section>
   );
 };

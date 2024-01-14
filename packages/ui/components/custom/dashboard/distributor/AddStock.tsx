@@ -30,9 +30,11 @@ const AddStockDistributor = ({
   Productname,
   id,
   user,
+  setInCart,
 }: {
   openSheet: boolean;
   setOpenSheet: React.Dispatch<React.SetStateAction<boolean>>;
+  setInCart: React.Dispatch<React.SetStateAction<boolean>>;
   Productname: string;
   user: string;
   id: string;
@@ -45,6 +47,7 @@ const AddStockDistributor = ({
       user,
     });
     if (response.data.success) {
+      setInCart(true);
       toast.success("Stock Added");
     } else {
       toast.error(response.data.message);

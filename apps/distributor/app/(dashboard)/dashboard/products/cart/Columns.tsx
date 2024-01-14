@@ -5,9 +5,10 @@ import { Checkbox } from "@repo/ui/shadCnComponents";
 import { profiles } from "@repo/drizzle/schema";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
-import { ArrowRight, EyeOff } from "lucide-react";
+import { ArrowRight, Delete, DeleteIcon, EyeOff } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { toast } from "sonner";
 
 function getProductName(id: string) {
   const { data, isLoading, isError } = useQuery({
@@ -44,8 +45,22 @@ function getProductName(id: string) {
   }
 }
 
-const onDelete = async (id: string) => {
+const onDelete = async (userId: string, productId: string) => {
   console.log("Delete");
+  // console.log(userId, productId);
+  const response = await axios.delete("/api/products/cart", {
+    data: {
+      userId,
+      productId,
+    },
+  });
+  if (response.data.success) {
+    toast.success(response.data.message);
+    return true;
+  } else {
+    toast.error(response.data.message);
+    return false;
+  }
 };
 
 export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
@@ -111,17 +126,38 @@ export const columns: ColumnDef<typeof profiles._.inferSelect>[] = [
     size: 4,
     enableResizing: false,
     header: ({ column }) => {
+      return <Button variant="ghost">quantity</Button>;
+    },
+    cell: ({ row }) => <p className="truncate ">{row.getValue("quantity")}</p>,
+    enableSorting: false,
+    enableHiding: true,
+  },
+  {
+    accessorKey: "action",
+    header: ({ column }) => {
       return (
-        <Button variant="ghost">
-          quantity
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Action
+          <Delete className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => (
-      <p className="truncate ">{row.getValue("quantity")}</p>
+      <div className="lowercase">
+        <Button
+          className="hover:scale-105 duration-200 transition-all"
+          variant={"destructive"}
+          onClick={() =>
+            onDelete(row.getValue("userId"), row.getValue("productId"))
+          }
+        >
+          <DeleteIcon className="w-full" />
+        </Button>
+      </div>
     ),
-    enableSorting: false,
-    enableHiding: true,
   },
   {
     accessorKey: "userId",

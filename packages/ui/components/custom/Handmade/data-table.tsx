@@ -152,6 +152,7 @@ function DataTable<TData, TValue>({
                   className="h-24 text-center"
                 >
                   <Loader2 className="mx-auto h-6 w-6 animate-spin" />
+                  No Results Found
                 </TableCell>
               </TableRow>
             )}

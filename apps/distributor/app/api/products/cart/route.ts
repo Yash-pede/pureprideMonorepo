@@ -1,7 +1,7 @@
 import { db } from "@repo/drizzle/db";
 import { cart } from "@repo/drizzle/schema";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 export const GET = async () => {
@@ -36,6 +36,27 @@ export const POST = async (req: Request) => {
       .values({ userId: user, productId: product, quantity })
       .returning();
     return NextResponse.json({ success: true });
+  } catch (err: any) {
+    console.log(err);
+    return NextResponse.json({
+      success: false,
+      message: err.message || "Something went wrong",
+    });
+  }
+};
+
+export const DELETE = async (req: Request) => {
+  console.log("DELETE");
+  try {
+    const { userId, productId } = await req.json();
+    console.log(userId, productId);
+    await db
+      .delete(cart)
+      .where(and(eq(cart.userId, userId), eq(cart.productId, productId)));
+    return NextResponse.json({
+      success: true,
+      message: "Product removed from cart",
+    });
   } catch (err: any) {
     console.log(err);
     return NextResponse.json({
