@@ -223,7 +223,7 @@ const ProductNav = () => {
                           {...field}
                         />
                         <div className="hidden xl:block">
-                          {!!files.length && (
+                          {!!!files.length && (
                             <>
                               <div
                                 className="w-full bg-secondary rounded-2xl relative h-[150px] flex justify-center items-center cursor-pointer"
@@ -264,7 +264,7 @@ const ProductNav = () => {
                         <section className="mt-10">
                           <p>{form.formState.errors.image?.message}</p>
                           <p>Added files</p>
-                          <ul className="flex flex-col space-y-7 w-full mt-2 text-sm  text-accent-foreground overflow-y-auto h-80 overflow-auto ">
+                          <ul className="flex flex-col space-y-7 w-full mt-2 text-sm  text-accent-foreground overflow-y-auto h-auto overflow-auto ">
                             {files.map((file) => (
                               <li
                                 key={file.name}
@@ -293,7 +293,7 @@ const ProductNav = () => {
                             <Button
                               variant={"destructive"}
                               onClick={() => removeAll()}
-                              className="w-full "
+                              className="w-full mt-7"
                             >
                               Remove
                             </Button>
