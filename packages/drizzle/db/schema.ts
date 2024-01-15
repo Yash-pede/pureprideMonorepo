@@ -43,6 +43,11 @@ export const userRoles = pgEnum("user_roles", [
   "DISTRIBUTORS",
   "UNDEFINED",
 ]);
+export const ordersStatus = pgEnum("orders_status", [
+  "pending",
+  "fulfilled",
+  "cancelled",
+]);
 export const equalityOp = pgEnum("equality_op", [
   "eq",
   "neq",
@@ -75,7 +80,7 @@ export const profiles = pgTable(
     return {
       profilesUsernameKey: unique("profiles_username_key").on(table.username),
     };
-  },
+  }
 );
 
 export const products = pgTable(
@@ -93,7 +98,7 @@ export const products = pgTable(
       productsNameUnique: unique("products_name_unique").on(table.name),
       productsImageUrlKey: unique("products_image URL_key").on(table.imageUrl),
     };
-  },
+  }
 );
 
 export const cart = pgTable("cart", {
@@ -111,6 +116,16 @@ export const productBatches = pgTable("product_batches", {
   createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
   quantity: bigint("quantity", { mode: "number" }),
+});
+
+export const orders = pgTable("orders", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  userId: uuid("userId").references(() => profiles.id),
+  productId: uuid("productId").references(() => products.id),
+  quantity: bigint("quantity", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  status: ordersStatus("status").default("pending"),
 });

@@ -1,4 +1,4 @@
-import { pgTable, unique, pgEnum, uuid, timestamp, text, foreignKey, bigint, date } from "drizzle-orm/pg-core"
+import { pgTable, foreignKey, pgEnum, uuid, bigint, timestamp, unique, text, date } from "drizzle-orm/pg-core"
   import { sql } from "drizzle-orm"
 
 export const keyStatus = pgEnum("key_status", ['default', 'valid', 'invalid', 'expired'])
@@ -7,10 +7,21 @@ export const factorType = pgEnum("factor_type", ['totp', 'webauthn'])
 export const factorStatus = pgEnum("factor_status", ['unverified', 'verified'])
 export const aalLevel = pgEnum("aal_level", ['aal1', 'aal2', 'aal3'])
 export const codeChallengeMethod = pgEnum("code_challenge_method", ['s256', 'plain'])
+export const ordersStatus = pgEnum("orders_status", ['pending', 'fulfilled', 'cancelled'])
 export const userRoles = pgEnum("user_roles", ['SUPERADMIN', 'ADMIN', 'DISTRIBUTORS', 'UNDEFINED'])
 export const equalityOp = pgEnum("equality_op", ['eq', 'neq', 'lt', 'lte', 'gt', 'gte', 'in'])
 export const action = pgEnum("action", ['INSERT', 'UPDATE', 'DELETE', 'TRUNCATE', 'ERROR'])
 
+
+export const orders = pgTable("orders", {
+	id: uuid("id").defaultRandom().primaryKey().notNull(),
+	userId: uuid("userId").references(() => profiles.id),
+	productId: uuid("productId").references(() => products.id),
+	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	quantity: bigint("quantity", { mode: "number" }).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	status: ordersStatus("status").default('pending'),
+});
 
 export const products = pgTable("products", {
 	id: uuid("id").defaultRandom().primaryKey().notNull(),
