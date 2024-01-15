@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { products } from "@repo/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -26,23 +26,29 @@ const ProductPage = ({
   const router = useRouter();
   const supabase = createClientComponentClient();
   const [addProductSheet, setAddProductSheet] = useState(false);
-  const {
-    data: product,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["product"],
-    queryFn: async () => {
-      try {
-        const response = await axios.post(`/api/products`, {
-          id: productId,
-        });
-        return response.data.product as products;
-      } catch (error: any) {
-        throw error.response?.data || error.message || error;
+  const [product, setProduct] = useState<products>({} as products);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const findProduct = async () => {
+      const response = await axios.post(`/api/products`, {
+        id: productId,
+      });
+      if (response.status !== 200) {
+        setIsError(true);
+        setIsLoading(false);
+        return;
       }
-    },
-  });
+      setIsLoading(false);
+      setProduct(
+        (response.data.product as products) ||
+          response.data.message ||
+          response.data.error
+      );
+    };
+    findProduct();
+  }, [productId]);
 
   if (isLoading) {
     return <div>Loading</div>;

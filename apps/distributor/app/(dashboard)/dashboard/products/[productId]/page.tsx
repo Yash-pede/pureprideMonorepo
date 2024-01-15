@@ -27,23 +27,34 @@ const ProductPage = () => {
   const [inCart, setInCart] = useState(false);
   supabase.auth.getUser().then((res) => setUserId(res.data.user?.id || ""));
   const [addProductSheet, setAddProductSheet] = useState(false);
-  const {
-    data: product,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["product"],
-    queryFn: async () => {
-      try {
-        const response = await axios.post(`/api/products`, {
-          id: productId,
-        });
-        return response.data.product as products;
-      } catch (error: any) {
-        throw error.response?.data || error.message || error;
+  const [product, setProduct] = useState<products>({} as products);
+  const [Loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    const cart = async () => {
+      const response = await axios.post(`/api/products`, {
+        id: productId,
+      });
+      if (response.status !== 200) {
+        setIsError(true);
+        setLoading(false);
+        return;
       }
-    },
-  });
+      setProduct(
+        (response.data.product as products) ||
+          response.data.message ||
+          response.data.error
+      );
+      setLoading(false);
+    };
+    cart();
+    if (cartLoading) setInCart(true);
+    else {
+      isInCart();
+    }
+  }, []);
+
   const { data: cart, isLoading: cartLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: async () => {
@@ -57,13 +68,8 @@ const ProductPage = () => {
     if (isProduct) setInCart(true);
     else setInCart(false);
   };
-  useEffect(() => {
-    if (cartLoading) setInCart(true);
-    else {
-      isInCart();
-    }
-  });
-  if (isLoading) {
+
+  if (Loading) {
     return <div>Loading</div>;
   }
 
@@ -73,7 +79,7 @@ const ProductPage = () => {
     return <div>Product not found</div>;
   }
 
-  // console.log(product);
+  console.log(product);
   return (
     <section className="flex flex-col lg:flex-row justify-around w-full h-full items-center overflow-hidden px-5">
       <div className="lg:w-1/2 lg:pr-10 lg:py-6 mb-6 lg:mb-0 space-y-5 md:space-y-7 w-full md:w-2/3 mx-auto h-fit">
