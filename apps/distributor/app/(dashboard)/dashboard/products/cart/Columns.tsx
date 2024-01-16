@@ -20,12 +20,10 @@ function getProductName(id: string) {
   });
 
   if (isLoading) {
-    // Loading state
     return <Skeleton className="h-full w-7 rounded-md"></Skeleton>;
   }
 
   if (isError) {
-    // Error state
     return <div>Error loading data</div>;
   }
 
@@ -47,7 +45,6 @@ function getProductName(id: string) {
 
 const onDelete = async (userId: string, productId: string) => {
   console.log("Delete");
-  // console.log(userId, productId);
   const response = await axios.delete("/api/products/cart", {
     data: {
       userId,

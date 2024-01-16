@@ -3,6 +3,20 @@ import { products } from "@repo/drizzle/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 
+export const GET = async () => {
+  console.log("GET");
+  try {
+    const allProducts = await db.select().from(products);
+    return NextResponse.json({ success: true, allProducts });
+  } catch (err: any) {
+    console.log(err);
+    return NextResponse.json({
+      success: false,
+      message: err.message || "Something went wrong",
+    });
+  }
+};
+
 export const POST = async (req: NextRequest) => {
   console.log("POST");
   try {
